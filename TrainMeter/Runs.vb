@@ -197,7 +197,7 @@
         ' get the first day of week for the current culture
         Dim fdow As DayOfWeek = ci.DateTimeFormat.FirstDayOfWeek
         ' return the week
-        Return cal.GetWeekOfYear([date], cwr, fdow)
+        Return cal.GetWeekOfYear([date], cwr, fdow) - 1
     End Function
 
     Private Function ConvertToDateTime(ByVal value As Integer) As DateTime
