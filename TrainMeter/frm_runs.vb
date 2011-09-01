@@ -25,11 +25,13 @@
     Private ProfilesList As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
     Private _Tracks As Tracks = New Tracks
     Private TracksList As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
+    Private _Runs As Runs = New Runs
 
 
     Public Sub RefreshTracks()
         Me.TracksList.Clear()
         Me.kltb_tracks.Items.Clear()
+        Me.kcbb_add_run_track.Items.Clear()
 
         Dim allTracks As Data.DataTable = Me._Tracks.GetAllTracks(Me.ProfilesList(Me.kdud_profiles.Text)).GetDataTable
         Dim item As ComponentFactory.Krypton.Toolkit.KryptonListItem
@@ -40,7 +42,9 @@
             item.ShortText = _Track.Item("name")
             item.LongText = _Track.Item("size") & " metros"
             Me.kltb_tracks.Items.Add(item)
+            Me.kcbb_add_run_track.Items.Add(_Track.Item("name"))
         Next
+        Me.kcbb_add_run_track.SelectedIndex = 0
     End Sub
 
     Public Sub RefreshProfiles()
@@ -92,6 +96,7 @@
 
     Private Sub kcbtn_add_run_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_add_run.CheckedChanged
         Me.khgp_add_run.Visible = Me.kcbtn_add_run.Checked
+
     End Sub
 
     Private Sub kcbtn_runs_weekly_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_runs_weekly.CheckedChanged
@@ -272,10 +277,6 @@
         Me.kcbtn_add_run.Checked = True
     End Sub
 
-    Private Sub khgp_add_run_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles khgp_add_run.Paint
-
-    End Sub
-
     Private Sub khgp_add_run_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_add_run.SizeChanged
         Me.pnl_add_run.Location = New Point((Me.khgp_add_run.Size.Width / 2) - (Me.pnl_add_run.Size.Width / 2),
                                               (Me.khgp_add_run.Size.Height / 2) - (Me.pnl_add_run.Size.Height / 2))
@@ -285,14 +286,25 @@
         Me.kcbtn_runs.Checked = True
         Me.kcbtn_add_run.Visible = False
         Me.kdtp_add_run_date.Value = Me.kdtp_add_run_date.CalendarTodayDate
-        Me.knud_add_run_duration.Value = 0
+        Me.knud_add_run_duration.Value = Me.knud_add_run_duration.Minimum
         Me.kcbx_add_run_track.Checked = True
         Me.kcbb_add_run_track.Text = ""
-        Me.knud_add_run_laps.Value = 1
-        Me.knud_add_run_distance.Value = 0
+        Me.knud_add_run_laps.Value = Me.knud_add_run_laps.Value
+        Me.knud_add_run_distance.Value = Me.knud_add_run_distance.Minimum
     End Sub
 
     Private Sub bshg_add_run_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_add_run_save.Click
+        If (Me.kcbx_add_run_track.Checked) Then
+            Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.TracksList(Me.kcbb_add_run_track.SelectedItem), Me.knud_add_run_laps.Value)
+        Else
+            Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.knud_add_run_distance.Value)
+        End If
+        Me.kcbtn_runs.Checked = True
+    End Sub
 
+    Private Sub khgp_add_run_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_add_run.VisibleChanged
+        If Me.khgp_add_run.Visible = True Then
+            Me.RefreshTracks()
+        End If
     End Sub
 End Class
