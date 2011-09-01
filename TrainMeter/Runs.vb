@@ -18,8 +18,23 @@
         Custom = 4
     End Enum
 
-    Public Function AddRun(ByVal datetime As Date)
+    Public Function AddRun(ByVal profile As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal track As Integer, ByVal laps As Integer) As Boolean
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("profile", profile))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", datetime))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("track", track))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("laps", laps))
+        QAT.Execute("ADD runs ID=#?,TRACK_ID=@track@,PROFILE_ID=@profile@,date=@datetime@,duration=@duration@,laps=@laps@,distance=-1")
+        Return (True)
+    End Function
 
+    Public Function AddRun(ByVal profile As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal distance As Integer) As Boolean
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("profile", profile))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", datetime))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("distance", distance))
+        QAT.Execute("ADD runs ID=#?,TRACK_ID=-1,PROFILE_ID=@profile@,date=@datetime@,duration=@duration@,laps=1,distance=@distance@")
+        Return (True)
     End Function
 
     Public Function GetWeeklyRuns(ByVal WeekNumber As Integer, ByVal Year As Integer, ByVal profile As Integer) As RunsReturn
