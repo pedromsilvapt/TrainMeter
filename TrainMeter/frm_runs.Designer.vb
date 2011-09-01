@@ -24,9 +24,9 @@ Partial Class frm_runs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_runs))
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.KryptonSplitContainer1 = New ComponentFactory.Krypton.Toolkit.KryptonSplitContainer()
         Me.kcbtn_add_run = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         Me.kdud_profiles = New ComponentFactory.Krypton.Toolkit.KryptonDomainUpDown()
@@ -378,7 +378,7 @@ Partial Class frm_runs
         '
         Me.knud_add_run_distance.Enabled = False
         Me.knud_add_run_distance.Location = New System.Drawing.Point(75, 125)
-        Me.knud_add_run_distance.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
+        Me.knud_add_run_distance.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.knud_add_run_distance.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.knud_add_run_distance.Name = "knud_add_run_distance"
         Me.knud_add_run_distance.Size = New System.Drawing.Size(67, 22)
@@ -387,6 +387,7 @@ Partial Class frm_runs
         '
         'kcbb_add_run_track
         '
+        Me.kcbb_add_run_track.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.kcbb_add_run_track.DropDownWidth = 121
         Me.kcbb_add_run_track.Location = New System.Drawing.Point(75, 72)
         Me.kcbb_add_run_track.Name = "kcbb_add_run_track"
@@ -444,9 +445,11 @@ Partial Class frm_runs
         Me.knud_add_run_duration.DecimalPlaces = 2
         Me.knud_add_run_duration.Location = New System.Drawing.Point(75, 43)
         Me.knud_add_run_duration.Maximum = New Decimal(New Integer() {240, 0, 0, 0})
+        Me.knud_add_run_duration.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.knud_add_run_duration.Name = "knud_add_run_duration"
         Me.knud_add_run_duration.Size = New System.Drawing.Size(121, 22)
         Me.knud_add_run_duration.TabIndex = 5
+        Me.knud_add_run_duration.Value = New Decimal(New Integer() {1, 0, 0, 131072})
         '
         'klbl_add_run_laps
         '
@@ -580,16 +583,16 @@ Partial Class frm_runs
         Me.Chart1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(13, 85)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart1.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(607, 266)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
