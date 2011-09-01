@@ -1,5 +1,5 @@
 TABLE runs;
-COLUMNS runs ID,TRACK_ID,PROFILE_ID,date,duration,laps;
+COLUMNS runs ID,TRACK_ID,PROFILE_ID,date,duration,laps,distance;
 TABLE tracks;
 COLUMNS tracks ID,PROFILE_ID,name,size;
 TABLE profiles;
