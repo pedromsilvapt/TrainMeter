@@ -1,0 +1,6 @@
+TABLE runs;
+COLUMNS runs ID,TRACK_ID,PROFILE_ID,date,duration,laps;
+TABLE tracks;
+COLUMNS tracks ID,PROFILE_ID,name,size;
+TABLE profiles;
+COLUMNS profiles ID,name;

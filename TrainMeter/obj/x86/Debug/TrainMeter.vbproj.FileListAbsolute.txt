@@ -1,0 +1,28 @@
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\bin\Debug\TrainMeter.exe
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\bin\Debug\TrainMeter.pdb
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\bin\Debug\TrainMeter.xml
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.frm_init.resources
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.frm_runs.resources
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.Resources.resources
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.exe
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.xml
+C:\Users\Clarinha\AppData\Local\Temporary Projects\TrainMeter\obj\x86\Debug\TrainMeter.pdb
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.exe
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.xml
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.pdb
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.frm_init.resources
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.frm_runs.resources
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\TrainMeter.exe
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\TrainMeter.pdb
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\TrainMeter.xml
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.Resources.resources
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\QATDB.dll
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\QATDB.xml
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\Transitions.dll
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.frm_profiles.resources
