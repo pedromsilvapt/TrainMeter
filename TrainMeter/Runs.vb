@@ -187,6 +187,19 @@
         Return d
     End Function
 
+    Public Function WeekOfYear(ByVal [date] As DateTime) As Integer
+        ' use the current culture
+        Dim ci As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        ' use current culture's calendar
+        Dim cal As System.Globalization.Calendar = ci.Calendar
+        ' get the calendar week rule (i.e. what determines the first week in the year)
+        Dim cwr As System.Globalization.CalendarWeekRule = ci.DateTimeFormat.CalendarWeekRule
+        ' get the first day of week for the current culture
+        Dim fdow As DayOfWeek = ci.DateTimeFormat.FirstDayOfWeek
+        ' return the week
+        Return cal.GetWeekOfYear([date], cwr, fdow)
+    End Function
+
     Private Function ConvertToDateTime(ByVal value As Integer) As DateTime
         Dim dateTime As New System.DateTime(1970, 1, 1, 0, 0, 0, 0)
 
@@ -202,19 +215,6 @@
 
         'return the total seconds (which is a UNIX timestamp)
         Return CDbl(span.TotalSeconds)
-    End Function
-
-    Private Function WeekOfYear(ByVal [date] As DateTime) As Integer
-        ' use the current culture
-        Dim ci As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        ' use current culture's calendar
-        Dim cal As System.Globalization.Calendar = ci.Calendar
-        ' get the calendar week rule (i.e. what determines the first week in the year)
-        Dim cwr As System.Globalization.CalendarWeekRule = ci.DateTimeFormat.CalendarWeekRule
-        ' get the first day of week for the current culture
-        Dim fdow As DayOfWeek = ci.DateTimeFormat.FirstDayOfWeek
-        ' return the week
-        Return cal.GetWeekOfYear([date], cwr, fdow)
     End Function
 
 End Class
