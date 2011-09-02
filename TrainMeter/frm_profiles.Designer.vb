@@ -37,6 +37,13 @@ Partial Class frm_profiles
         Me.klbl_no_profiles = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
         Me.kltb_profiles = New ComponentFactory.Krypton.Toolkit.KryptonListBox()
         Me.KryptonManager = New ComponentFactory.Krypton.Toolkit.KryptonManager(Me.components)
+        Me.khgp_edit_profile = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
+        Me.bshg_edit_profile_save = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.bshg_edit_profile_cancel = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.pnl_edit_profile_background = New System.Windows.Forms.Panel()
+        Me.pnl_edit_profile = New System.Windows.Forms.Panel()
+        Me.ktxt_edit_profile_name = New ComponentFactory.Krypton.Toolkit.KryptonTextBox()
+        Me.klbl_edit_profile_name = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
         CType(Me.kpnl_window_background, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.kpnl_window_background.SuspendLayout()
         CType(Me.khgp_add_profile, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,10 +54,16 @@ Partial Class frm_profiles
         CType(Me.khgp_profiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.khgp_profiles.Panel.SuspendLayout()
         Me.khgp_profiles.SuspendLayout()
+        CType(Me.khgp_edit_profile, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.khgp_edit_profile.Panel.SuspendLayout()
+        Me.khgp_edit_profile.SuspendLayout()
+        Me.pnl_edit_profile_background.SuspendLayout()
+        Me.pnl_edit_profile.SuspendLayout()
         Me.SuspendLayout()
         '
         'kpnl_window_background
         '
+        Me.kpnl_window_background.Controls.Add(Me.khgp_edit_profile)
         Me.kpnl_window_background.Controls.Add(Me.khgp_add_profile)
         Me.kpnl_window_background.Controls.Add(Me.khgp_profiles)
         Me.kpnl_window_background.Dock = System.Windows.Forms.DockStyle.Fill
@@ -184,6 +197,69 @@ Partial Class frm_profiles
         '
         Me.KryptonManager.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Black
         '
+        'khgp_edit_profile
+        '
+        Me.khgp_edit_profile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.khgp_edit_profile.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.bshg_edit_profile_save, Me.bshg_edit_profile_cancel})
+        Me.khgp_edit_profile.HeaderVisibleSecondary = False
+        Me.khgp_edit_profile.Location = New System.Drawing.Point(2, 210)
+        Me.khgp_edit_profile.Name = "khgp_edit_profile"
+        '
+        'khgp_edit_profile.Panel
+        '
+        Me.khgp_edit_profile.Panel.Controls.Add(Me.pnl_edit_profile_background)
+        Me.khgp_edit_profile.Size = New System.Drawing.Size(360, 76)
+        Me.khgp_edit_profile.TabIndex = 2
+        Me.khgp_edit_profile.ValuesPrimary.Heading = "Editar Perfil"
+        Me.khgp_edit_profile.ValuesPrimary.Image = CType(resources.GetObject("KryptonHeaderGroup1.ValuesPrimary.Image"), System.Drawing.Image)
+        Me.khgp_edit_profile.Visible = False
+        '
+        'bshg_edit_profile_save
+        '
+        Me.bshg_edit_profile_save.Image = CType(resources.GetObject("bshg_edit_profile_save.Image"), System.Drawing.Image)
+        Me.bshg_edit_profile_save.UniqueName = "AE3D49526EE54AACD28AEF6300B26AA3"
+        '
+        'bshg_edit_profile_cancel
+        '
+        Me.bshg_edit_profile_cancel.Image = CType(resources.GetObject("bshg_edit_profile_cancel.Image"), System.Drawing.Image)
+        Me.bshg_edit_profile_cancel.UniqueName = "4DEBC9106A99440EBC91D9A8CC5FEEA6"
+        '
+        'pnl_edit_profile_background
+        '
+        Me.pnl_edit_profile_background.BackColor = System.Drawing.Color.White
+        Me.pnl_edit_profile_background.Controls.Add(Me.pnl_edit_profile)
+        Me.pnl_edit_profile_background.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnl_edit_profile_background.Location = New System.Drawing.Point(0, 0)
+        Me.pnl_edit_profile_background.Name = "pnl_edit_profile_background"
+        Me.pnl_edit_profile_background.Size = New System.Drawing.Size(358, 44)
+        Me.pnl_edit_profile_background.TabIndex = 3
+        '
+        'pnl_edit_profile
+        '
+        Me.pnl_edit_profile.BackColor = System.Drawing.Color.White
+        Me.pnl_edit_profile.Controls.Add(Me.ktxt_edit_profile_name)
+        Me.pnl_edit_profile.Controls.Add(Me.klbl_edit_profile_name)
+        Me.pnl_edit_profile.Location = New System.Drawing.Point(63, 6)
+        Me.pnl_edit_profile.Name = "pnl_edit_profile"
+        Me.pnl_edit_profile.Size = New System.Drawing.Size(202, 35)
+        Me.pnl_edit_profile.TabIndex = 2
+        '
+        'ktxt_edit_profile_name
+        '
+        Me.ktxt_edit_profile_name.Location = New System.Drawing.Point(71, 8)
+        Me.ktxt_edit_profile_name.Name = "ktxt_edit_profile_name"
+        Me.ktxt_edit_profile_name.Size = New System.Drawing.Size(100, 20)
+        Me.ktxt_edit_profile_name.TabIndex = 1
+        '
+        'klbl_edit_profile_name
+        '
+        Me.klbl_edit_profile_name.Location = New System.Drawing.Point(26, 8)
+        Me.klbl_edit_profile_name.Name = "klbl_edit_profile_name"
+        Me.klbl_edit_profile_name.Size = New System.Drawing.Size(47, 20)
+        Me.klbl_edit_profile_name.TabIndex = 0
+        Me.klbl_edit_profile_name.Values.Text = "Nome:"
+        '
         'frm_profiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -207,6 +283,12 @@ Partial Class frm_profiles
         Me.khgp_profiles.Panel.PerformLayout()
         CType(Me.khgp_profiles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.khgp_profiles.ResumeLayout(False)
+        Me.khgp_edit_profile.Panel.ResumeLayout(False)
+        CType(Me.khgp_edit_profile, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.khgp_edit_profile.ResumeLayout(False)
+        Me.pnl_edit_profile_background.ResumeLayout(False)
+        Me.pnl_edit_profile.ResumeLayout(False)
+        Me.pnl_edit_profile.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -239,4 +321,11 @@ Partial Class frm_profiles
     Friend WithEvents bhsg_add_profile_cancel As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
     Friend WithEvents pnl_add_profile_background As System.Windows.Forms.Panel
     Friend WithEvents bshg_refresh_profiles As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
+    Friend WithEvents khgp_edit_profile As ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup
+    Friend WithEvents bshg_edit_profile_save As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
+    Friend WithEvents bshg_edit_profile_cancel As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
+    Friend WithEvents pnl_edit_profile_background As System.Windows.Forms.Panel
+    Friend WithEvents pnl_edit_profile As System.Windows.Forms.Panel
+    Friend WithEvents ktxt_edit_profile_name As ComponentFactory.Krypton.Toolkit.KryptonTextBox
+    Friend WithEvents klbl_edit_profile_name As ComponentFactory.Krypton.Toolkit.KryptonLabel
 End Class
