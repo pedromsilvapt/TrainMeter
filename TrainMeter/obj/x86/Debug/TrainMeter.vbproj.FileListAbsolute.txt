@@ -26,3 +26,4 @@ C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bi
 C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\QATDB.xml
 C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\Transitions.dll
 C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\obj\x86\Debug\TrainMeter.frm_profiles.resources
+C:\Users\Clarinha\documents\visual studio 2010\Projects\TrainMeter\TrainMeter\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
