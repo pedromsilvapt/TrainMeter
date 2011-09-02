@@ -175,11 +175,11 @@ Public Class frm_profiles
         If (Me.khgp_edit_profile.Visible = True) Then
 
             Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideEdit_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
 
             Me.hideAdd.add(Me.khgp_edit_profile, "Top", Me.kpnl_window_background.Size.Height + 76)
-            Me.hideAdd_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
-            Transitions.Transition.runChain(Me.hideAdd, Me.hideAdd_mg)
+            Me.hideEdit_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
+            Transitions.Transition.runChain(Me.hideAdd, Me.hideEdit_mg)
         End If
     End Sub
 
