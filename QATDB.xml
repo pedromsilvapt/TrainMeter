@@ -1,0 +1,338 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+QATDB
+</name>
+</assembly>
+<members>
+<member name="P:QATDB.QATCore.Version">
+	<summary>
+ QATDB Version
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:QATDB.QATCore.AttachedAndAuthenticated">
+	<summary>
+ Checks if the current instance is attached and authenticated
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:QATDB.QATCore.DataBaseName">
+	<summary>
+ Get the database name
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:QATDB.QATCore.DebugMode">
+	<summary>
+ Toggles debug mode. Determine if it should output errors or not
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.ExecuteScript(System.String,System.Boolean,System.String[]@)">
+	<summary>
+ Executes the given script
+ </summary>
+	<param name="Script">Script to be executed</param>
+	<param name="DetachAtFinal">Determines if you want to detach the database at the end of the execution</param>
+	<param name="Output">Output array, ordered by output sequence</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.CreateDatabase(System.String,System.String,System.String,System.String)">
+	<summary>
+ Creates a new database and authenticates the user
+ </summary>
+	<param name="DBaseName">Database name</param>
+	<param name="Username">Username for the main database user</param>
+	<param name="Password">Password for the main database user</param>
+	<param name="DatabaseTargetPath">Local database path to write</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.RemoveTable(System.String)">
+	<summary>
+ Removes a database table
+ </summary>
+	<param name="TableName">Table name to remove</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddTable(System.String)">
+	<summary>
+ Adds a table to the database
+ </summary>
+	<param name="TableName">Tablename to add</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddTable(System.String,System.String[])">
+	<summary>
+ Adds a table to the database
+ </summary>
+	<param name="TableName">Tablename to add</param>
+	<param name="Columns">Columns to add, as array</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.RemoveColumn(System.String,System.String)">
+	<summary>
+ Removes a database column
+ </summary>
+	<param name="TableName">The table name where the column belongs</param>
+	<param name="ColumnName">The column name to delete</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddColumn(System.String,System.String)">
+	<summary>
+ Adds a column to the database
+ </summary>
+	<param name="TableName">Table where to add this column</param>
+	<param name="ColumnName">Column name to add</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddColumn(System.String,System.String[])">
+	<summary>
+ Adds columns to the database
+ </summary>
+	<param name="TableName">Table where to add this column</param>
+	<param name="Columns">Columns names to add, as array</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.SynchronizeInstance">
+	<summary>
+ Synchronizes this instance of QAT. Forces cache to update from text file.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.ResetTableAID(System.String)">
+	<summary>
+ Resets the table AID (Automatic ID)
+ </summary>
+	<param name="TableName">The name of the table to reset</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.InstantSave">
+	<summary>
+ Instantly saves the cache to database file
+ </summary>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.TableExists(System.String)">
+	<summary>
+ Checks if a table exists
+ </summary>
+	<param name="Tablename">Table name to seek</param>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.ColumnExists(System.String,System.String)">
+	<summary>
+ Checks if a column exists
+ </summary>
+	<param name="Tablename">Table name frome where the column belongs</param>
+	<param name="ColumnName">Column name to seek</param>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.CountUsers">
+	<summary>
+ Count the number of users in a database
+ </summary>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.CountColumns(System.String)">
+	<summary>
+ Count the number of columns in a table
+ </summary>
+	<param name="Tablename">Table name to count in</param>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.CountTables">
+	<summary>
+ Count the number of tables in the database
+ </summary>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.GetTables">
+	<summary>
+ Gets a list of all tables in the database
+ </summary>
+	<returns>List(Of String) containing the table names</returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.GetUsers">
+	<summary>
+ Gets a list of all users in the database
+ </summary>
+	<returns>List(Of String) containing the users data</returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.GetColumns(System.String)">
+	<summary>
+ Gets a list of all columns in the specified table
+ </summary>
+	<param name="TableName"></param>
+	<returns>List(Of String) containing the column names</returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.RemoveUser(System.String)">
+	<summary>
+ Removes a user from the database
+ </summary>
+	<param name="Username">Username to remove</param>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.AddUser(System.String,System.String,QATDB.QATCore.UserAccessLevel)">
+	<summary>
+ Adds a user to the database
+ </summary>
+	<param name="EUuser">Username</param>
+	<param name="EUpass">Password</param>
+	<param name="ALvl">Access level</param>
+	<returns></returns>
+	<remarks>Requires valid authentication</remarks>
+</member><member name="M:QATDB.QATCore.TestDBConnection">
+	<summary>
+ Test the file read/write rights
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddParameter(QATDB.QATCore.QATParameter)">
+	<summary>
+ Adds a parameter to be used in next query.
+ </summary>
+	<param name="Parameter">Parameter as QATParameter to be added</param>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddParameter(System.Collections.Generic.List{QATDB.QATCore.QATParameter})">
+	<summary>
+ Adds a parameter to be used in next query.
+ </summary>
+	<param name="Parameters">List of QATParameter to be added</param>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AddParameter(System.String,System.String)">
+	<summary>
+ Adds a parameter to be used in next query.
+ </summary>
+	<param name="ParameterName">The name of the parameter to be added</param>
+ ''' <param name="ParameterValue">The value of the parameter to be added</param>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.Execute(System.String)">
+	<summary>
+ Executes a query to the QAT Database
+ </summary>
+	<param name="Query">Query string</param>
+	<returns>Properly filled QATResult</returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.ExecuteSingle(System.String)">
+	<summary>
+ Executes a query and returns the first column of the first row only
+ </summary>
+	<param name="Query">Query to execute</param>
+	<returns>String</returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.GetTableAID(System.String)">
+	<summary>
+ Gets the table automatic identification
+ </summary>
+	<param name="Table">Table to get AutoID</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.AttachAndAuthenticate(System.String,System.String,System.String)">
+	<summary>
+ Attaches and authenticates onto a QATDB file
+ </summary>
+	<param name="DatabaseFile">The full path of the file</param>
+	<param name="Username">Username to login</param>
+	<param name="Password">Password for the username</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.Attach(System.String)">
+	<summary>
+ Attaches a database file to QATCore
+ </summary>
+	<param name="DatabaseFile">File path</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.Detach">
+	<summary>
+ Detaches a database file from QATCore
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATCore.Authenticate(System.String,System.String)">
+	<summary>
+ Authenticates the QATCore into the database
+ </summary>
+	<param name="Username">Username to authenticate</param>
+	<param name="Password">Password to authenticate</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATTools.ModulateData(System.String)">
+	<summary>
+ Modulates the data to filter invalid characters
+ </summary>
+	<param name="Data"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATTools.DemodulateData(System.String)">
+	<summary>
+ Demodulates the data, inverting the modulation
+ </summary>
+	<param name="Data"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATTools.NowTimeStamp">
+	<summary>
+ Returns a time stamp of the call exact moment
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATTools.AddZeros(System.String)">
+	<summary>
+ Add a zero to any number below 10
+ </summary>
+	<param name="Number"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATTools.ValidateName(System.String)">
+	<summary>
+ Validates the names that can be used in database, table and column names
+ </summary>
+	<param name="Name"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:QATDB.QATResult.RowCount">
+	<summary>
+ Returns the number of rows in this QATResult
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:QATDB.QATResult.ColumnCount">
+	<summary>
+ Returns the number of columns in this QATResult
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATResult.GetDataTable">
+	<summary>
+ Returns a DataTable with the query result
+ </summary>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATResult.GetArrayOfString">
+	<summary>
+ Returns a List(Of Strings( )) with the query result
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATResult.GetFirst(System.String)">
+	<summary>
+ Gets the value of the given column from the first row returned
+ </summary>
+	<param name="Column">Name of the column</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:QATDB.QATResult.HasNothing">
+	<summary>
+ Checks if this QATResult is empty
+ </summary>
+	<returns>Boolean</returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
