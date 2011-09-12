@@ -4,6 +4,10 @@
         Return QAT.Execute("LIST ID, name FROM profiles")
     End Function
 
+    Public Function ProfilesCount()
+        Return QAT.Execute("COUNT profiles").RowCount
+    End Function
+
     Public Function AddProfile(ByVal name As String) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("name", name))
         QAT.Execute("ADD profiles ID=#?,name=@name@")
