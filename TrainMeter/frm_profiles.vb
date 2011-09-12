@@ -48,8 +48,8 @@ Public Class frm_profiles
             Me.khgp_add_profile.Visible = True
             Me.khgp_add_profile.Location = New Point(2, Me.kpnl_window_background.Size.Height)
 
-            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.showAdd.add(Me.khgp_add_profile, "Top", Me.kpnl_window_background.Size.Height - 76)
             Me.showAdd_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height - 75)
@@ -78,8 +78,8 @@ Public Class frm_profiles
             Me._Profiles.AddProfile(Me.ktxt_add_profile_name.Text)
             Me.kltb_profiles.Items.Add(Me.ktxt_add_profile_name.Text)
 
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.hideAdd.add(Me.khgp_add_profile, "Top", Me.kpnl_window_background.Size.Height + 76)
             Me.hideAdd_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
@@ -94,8 +94,8 @@ Public Class frm_profiles
     Private Sub bhsg_add_profile_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bhsg_add_profile_cancel.Click
         If (Me.khgp_add_profile.Visible = True) Then
 
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.hideAdd.add(Me.khgp_add_profile, "Top", Me.kpnl_window_background.Size.Height + 76)
             Me.hideAdd_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
@@ -127,8 +127,8 @@ Public Class frm_profiles
             Me.khgp_edit_profile.Visible = True
             Me.khgp_edit_profile.Location = New Point(2, Me.kpnl_window_background.Size.Height)
 
-            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.showAdd.add(Me.khgp_edit_profile, "Top", Me.kpnl_window_background.Size.Height - 76)
             Me.showAdd_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height - 75)
@@ -158,8 +158,8 @@ Public Class frm_profiles
             Me._Profiles.EditProfile(Me.EditUserID, Me.ktxt_edit_profile_name.Text)
             Me.RefreshProfiles()
 
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideEdit_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideEdit_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.hideAdd.add(Me.khgp_edit_profile, "Top", Me.kpnl_window_background.Size.Height + 76)
             Me.hideEdit_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
@@ -174,8 +174,8 @@ Public Class frm_profiles
     Private Sub bhsg_edit_profile_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_edit_profile_cancel.Click
         If (Me.khgp_edit_profile.Visible = True) Then
 
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideEdit_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideEdit_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
             Me.hideAdd.add(Me.khgp_edit_profile, "Top", Me.kpnl_window_background.Size.Height + 76)
             Me.hideEdit_mg.add(Me.khgp_profiles, "Height", Me.khgp_profiles.Size.Height + 76)
