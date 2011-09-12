@@ -4,7 +4,7 @@
         Return QAT.Execute("LIST ID, name FROM profiles")
     End Function
 
-    Public Function ProfilesCount()
+    Public Function ProfilesCount() As Integer
         Return QAT.Execute("COUNT profiles").RowCount
     End Function
 
