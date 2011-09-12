@@ -69,9 +69,9 @@ Namespace My.Resources
         
         '''<summary>
         '''  Looks up a localized string similar to TABLE runs;
-        '''COLUMNS runs ID,TRACK_ID,PROFILE_ID,date,duration,laps;
+        '''COLUMNS runs ID,TRACK_ID,PROFILE_ID,date,duration,laps,distance;
         '''TABLE tracks;
-        '''COLUMNS tracks ID,name,size;
+        '''COLUMNS tracks ID,PROFILE_ID,name,size;
         '''TABLE profiles;
         '''COLUMNS profiles ID,name;.
         '''</summary>
