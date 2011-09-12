@@ -8,16 +8,20 @@
     End Enum
 
     Private ToolbarState As CollapsingState = CollapsingState.Showed
+    Private Changed As Boolean = False
+
+    Private EditID As Integer = -1
 
     Private WithEvents showAdd As Transitions.Transition
-    Private WithEvents showAdd_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-    Private WithEvents hideAdd As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-    Private WithEvents hideAdd_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+    Private WithEvents showAdd_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+    Private WithEvents hideAdd As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+    Private WithEvents hideAdd_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+    Private WithEvents hideEdit As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
     Private WithEvents showToolbar As Transitions.Transition
-    Private WithEvents showToolbar_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-    Private WithEvents hideToolbar As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-    Private WithEvents hideToolbar_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+    Private WithEvents showToolbar_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+    Private WithEvents hideToolbar As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+    Private WithEvents hideToolbar_mg As Transitions.Transition = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
     Private WithEvents blink As Transitions.Transition
 
@@ -27,6 +31,18 @@
     Private TracksList As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)
     Private _Runs As Runs = New Runs
 
+    Public Sub RefreshRuns()
+        Me.dgv_runs.Rows.Clear()
+        Dim all_tracks As QATDB.QATResult
+
+        If (Me.kcbtn_runs_weekly.Checked) Then
+            all_tracks = Me._Runs.GetWeeklyRuns(Me.knud_runs_weekly_week.Value, Me.knud_runs_weekly_year.Value, Me.ProfilesList(Me.kdud_profiles.Text)).QueryResult
+        End If
+
+        For Each _Track As DataRowCollection In all_tracks.GetDataTable.Rows
+            Me.dgv_runs.Rows.Add(_Track.Item("ID"), _Track.Item("date"), _Track.Item("duration"), _Track.Item("ID"), _Track.Item("TRACK_ID"), _Track.Item("laps"), _Track.Item("distance"))
+        Next
+    End Sub
 
     Public Sub RefreshTracks()
         Me.TracksList.Clear()
@@ -44,7 +60,9 @@
             Me.kltb_tracks.Items.Add(item)
             Me.kcbb_add_run_track.Items.Add(_Track.Item("name"))
         Next
-        Me.kcbb_add_run_track.SelectedIndex = 0
+        If (Me.TracksList.Count > 0) Then
+            Me.kcbb_add_run_track.SelectedIndex = 0
+        End If
     End Sub
 
     Public Sub RefreshProfiles()
@@ -85,9 +103,328 @@
         Me.kpnl_runs_custom.Visible = Me.kcbtn_runs_custom.Checked
     End Sub
 
+#Region "RunsToolbarChanges"
+    ' Weekly '
+    Private Sub knud_runs_weekly_last_weeks_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_weekly_last_weeks.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Dim currentWeek As Integer = Me._Runs.WeekOfYear(Now)
+        Dim week As Integer = 0
+        Dim years As Integer = 0
+        If (Me.knud_runs_weekly_last_weeks.Value < currentWeek) Then
+            week = currentWeek - Me.knud_runs_weekly_last_weeks.Value
+            years = Now.Year
+        ElseIf Me.knud_runs_weekly_last_weeks.Value = currentWeek Then
+            years = Now.Year - 1
+            week = 52
+        Else
+            week = 52 - ((Me.knud_runs_weekly_last_weeks.Value - currentWeek) Mod 52)
+            years = (Now.Year - (((Me.knud_runs_weekly_last_weeks.Value - currentWeek) / 52) + 1))
+        End If
+
+        Me.Changed = True
+
+        Me.knud_runs_weekly_week.Value = week
+        Me.knud_runs_weekly_year.Value = years
+
+        Me.Changed = False
+
+        Me.RefreshRuns()
+    End Sub
+
+    Private Sub knud_runs_weekly_week_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_weekly_week.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Dim year As Integer = 0
+        Dim weeks As Integer = 0
+
+        Me.Changed = True
+
+        If (Me.knud_runs_weekly_year.Value >= Now.Year) Then
+            Me.knud_runs_weekly_year.Value = Now.Year
+            If (Me.knud_runs_weekly_week.Value >= Me._Runs.WeekOfYear(Now)) Then
+                Me.knud_runs_weekly_week.Value = Me._Runs.WeekOfYear(Now)
+            End If
+            Me.knud_runs_weekly_last_weeks.Value = Me._Runs.WeekOfYear(Now) - Me.knud_runs_weekly_week.Value
+        Else
+            year = Now.Year - Me.knud_runs_weekly_year.Value
+            weeks = (52 - Me.knud_runs_weekly_week.Value) + ((year - 1) * 52) + Me._Runs.WeekOfYear(Now)
+            Me.knud_runs_weekly_last_weeks.Value = weeks
+        End If
+
+        Me.Changed = False
+    End Sub
+
+    Private Sub knud_runs_weekly_year_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_weekly_year.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+
+        If (Me.knud_runs_weekly_year.Value >= Now.Year) Then
+            Me.knud_runs_weekly_year.Value = Now.Year
+            If (Me.knud_runs_weekly_week.Value >= Me._Runs.WeekOfYear(Now)) Then
+                Me.knud_runs_weekly_week.Value = Me._Runs.WeekOfYear(Now)
+            End If
+            Me.knud_runs_weekly_last_weeks.Value = Me._Runs.WeekOfYear(Now) - Me.knud_runs_weekly_week.Value
+        Else
+            Me.knud_runs_weekly_last_weeks.Value = (((Now.Year - Me.knud_runs_weekly_year.Value) - 1) * 52) + (52 - Me.knud_runs_weekly_week.Value) + Me._Runs.WeekOfYear(Now)
+        End If
+
+        Me.Changed = False
+    End Sub
+    ' !Weekly '
+
+    ' Monthly '
+    Private Sub knud_runs_monthly_months_before_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_monthly_months_before.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+        If (Me.knud_runs_monthly_months_before.Value < Now.Month) Then
+            Me.knud_runs_monthly_year.Value = Now.Year
+            Me.kdud_runs_monthly_month.SelectedIndex = Now.Month - Me.knud_runs_monthly_months_before.Value - 1
+        ElseIf Me.knud_runs_monthly_months_before.Value = Now.Month Then
+            Me.knud_runs_monthly_year.Value = Now.Year - 1
+            Me.kdud_runs_monthly_month.SelectedIndex = 11
+        Else
+            Me.knud_runs_monthly_year.Value = Now.Year - (Me.knud_runs_monthly_months_before.Value / 12)
+            Me.kdud_runs_monthly_month.SelectedIndex = 11 - ((Me.knud_runs_monthly_months_before.Value - Now.Month) Mod 12)
+        End If
+        Me.Changed = False
+
+
+    End Sub
+
+    Private Sub kdud_runs_monthly_month_SelectedItemChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles kdud_runs_monthly_month.SelectedItemChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+        If (Me.knud_runs_monthly_year.Value = Now.Year) Then
+            If (Me.kdud_runs_monthly_month.SelectedIndex + 1 >= Now.Month) Then
+                Me.kdud_runs_monthly_month.SelectedIndex = Now.Month - 1
+                Me.knud_runs_monthly_months_before.Value = 0
+            Else
+                Me.knud_runs_monthly_months_before.Value = Now.Month - (Me.kdud_runs_monthly_month.SelectedIndex + 1)
+            End If
+        Else
+            Me.knud_runs_monthly_months_before.Value = ((Now.Year - Me.knud_runs_monthly_year.Value) * 12) + (12 - (Me.kdud_runs_monthly_month.SelectedIndex)) - 4
+        End If
+        Me.Changed = False
+    End Sub
+
+    Private Sub knud_runs_monthly_year_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_monthly_year.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+        If (Me.knud_runs_monthly_year.Value >= Now.Year) Then
+            If (Me.kdud_runs_monthly_month.SelectedIndex + 1 >= Now.Month) Then
+                Me.kdud_runs_monthly_month.SelectedIndex = Now.Month - 1
+            End If
+            Me.knud_runs_monthly_year.Value = Now.Year
+            Me.knud_runs_monthly_months_before.Value = Now.Month - (Me.kdud_runs_monthly_month.SelectedIndex + 1)
+        Else
+            Me.knud_runs_monthly_months_before.Value = ((Now.Year - Me.knud_runs_monthly_year.Value - 1) * 12) + (11 - Me.kdud_runs_monthly_month.SelectedIndex) + Now.Month
+        End If
+        Me.Changed = False
+    End Sub
+    ' !Monthly '
+
+    ' Anual '
+    Private Sub knud_runs_anual_years_before_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_anual_years_before.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+        Me.knud_runs_anual_year.Value = Now.Year - Me.knud_runs_anual_years_before.Value
+        Me.Changed = False
+    End Sub
+
+    Private Sub knud_runs_anual_year_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles knud_runs_anual_year.ValueChanged
+        If Me.Changed = True Then
+            Exit Sub
+        End If
+
+        Me.Changed = True
+
+        If (Me.knud_runs_anual_year.Value > Now.Year) Then
+            Me.knud_runs_anual_year.Value = Now.Year
+        End If
+
+        Me.knud_runs_anual_years_before.Value = Now.Year - Me.knud_runs_anual_year.Value
+
+        Me.Changed = False
+    End Sub
+    ' !Anual '
+#End Region
+
+#Region "AddTrack Panel"
+
+    Private Sub khgp_add_track_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_add_track.SizeChanged
+        'Me.klbl_no_profiles.Location = New Point((Me.khgp_profiles.Size.Width / 2) - (Me.klbl_no_profiles.Size.Width / 2),
+        '                                        (Me.khgp_profiles.Size.Height / 2) - (Me.klbl_no_profiles.Size.Height / 2))
+        Me.pnl_add_track.Location = New Point((Me.khgp_add_track.Size.Width / 2) - (Me.pnl_add_track.Size.Width / 2), Me.pnl_add_track.Location.Y)
+    End Sub
+
+    Private Sub btnshg_add_track_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnshg_add_track.Click
+        If (Me.khgp_add_track.Visible = False And Me.khgp_edit_track.Visible = False) Then
+            Me.khgp_add_track.Visible = True
+            Me.khgp_add_track.Location = New Point(0, Me.Height)
+
+            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+            Me.showAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height - 75)
+            Me.showAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height - 76)
+
+            Transitions.Transition.runChain(Me.showAdd_mg, Me.showAdd)
+        End If
+    End Sub
+
+    Private Sub bhsg_add_track_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bhsg_add_track_cancel.Click
+        If (Me.khgp_add_track.Visible = True) Then
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+            Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
+            Me.hideAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height + 76)
+
+            Transitions.Transition.runChain(Me.hideAdd, Me.hideAdd_mg)
+        End If
+    End Sub
+
+    Private Sub bhsg_add_track_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bhsg_add_track_save.Click
+        If (Me.ktxt_add_track_name.Text = "" Or Me.TracksList.ContainsKey(Me.ktxt_add_track_name.Text)) Then
+            Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
+            Me.blink.add(Me.pnl_add_track, "BackColor", Color.FromArgb(255, 255, 160, 160))
+            Me.blink.add(Me.pnl_add_track_background, "BackColor", Color.FromArgb(255, 255, 160, 160))
+            Me.blink.run()
+        Else
+            Me._Tracks.AddTrack(Me.ProfilesList(Me.kdud_profiles.Text), Me.ktxt_add_track_name.Text, Me.knud_add_track_size.Value)
+            Me.RefreshTracks()
+
+            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+            Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
+            Me.hideAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height + 76)
+
+            Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
+            Me.blink.add(Me.pnl_add_track, "BackColor", Color.FromArgb(255, 173, 255, 160))
+            Me.blink.add(Me.pnl_add_track_background, "BackColor", Color.FromArgb(255, 173, 255, 160))
+            Transitions.Transition.runChain(Me.blink, Me.hideAdd, Me.hideAdd_mg)
+        End If
+    End Sub
+
+    Private Sub hideAdd_TransitionCompletedEvent(ByVal sender As Object, ByVal e As Transitions.Transition.Args) Handles hideAdd.TransitionCompletedEvent
+        Me.khgp_add_track.Visible = False
+        Me.pnl_add_track.BackColor = Color.White
+        Me.pnl_add_track_background.BackColor = Color.White
+        Me.ktxt_add_track_name.Text = ""
+        Me.knud_add_track_size.Value = 1
+    End Sub
+
+#End Region
+
+#Region "EditTrack Panel"
+
+    Private Sub khgp_edit_track_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_edit_track.SizeChanged
+        Me.pnl_edit_track.Location = New Point((Me.khgp_edit_track.Size.Width / 2) - (Me.pnl_edit_track.Size.Width / 2), Me.pnl_edit_track.Location.Y)
+    End Sub
+
+    Private Sub btnshg_edit_track_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnshg_edit_track.Click
+        If (Me.khgp_edit_track.Visible = False And kltb_tracks.SelectedIndex <> -1 And Me.khgp_add_track.Visible = False) Then
+            If Me.TracksList.ContainsKey(Me.kltb_tracks.SelectedItem.ShortText) Then
+                Me.khgp_edit_track.Visible = True
+                Me.khgp_edit_track.Location = New Point(0, Me.Height)
+
+                Me.ktxt_edit_track_name.Text = Me.kltb_tracks.Items(Me.kltb_tracks.SelectedIndex).ShortText
+                Me.knud_edit_track_size.Value = Me.kltb_tracks.Items(Me.kltb_tracks.SelectedIndex).LongText.Substring(0, Len(Me.kltb_tracks.Items(Me.kltb_tracks.SelectedIndex).LongText) - Len(" metros"))
+
+                Me.EditID = Me.TracksList(Me.kltb_tracks.SelectedItem.ShortText)
+
+                Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+                Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+                Me.showAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height - 75)
+                Me.showAdd.add(Me.khgp_edit_track, "Top", Me.khgp_tracks.Size.Height - 76)
+
+                Transitions.Transition.runChain(Me.showAdd_mg, Me.showAdd)
+            End If
+        End If
+    End Sub
+
+    Private Sub bhsg_edit_track_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_edit_track_cancel.Click
+        If (Me.khgp_edit_track.Visible = True) Then
+            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideEdit = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+            Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
+            Me.hideEdit.add(Me.khgp_edit_track, "Top", Me.khgp_tracks.Size.Height + 76)
+
+            Me.EditID = -1
+
+            Transitions.Transition.runChain(Me.hideEdit, Me.hideAdd_mg)
+        End If
+    End Sub
+
+    Private Sub bhsg_edit_track_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_edit_track_save.Click
+        If (Me.ktxt_edit_track_name.Text = "") Then
+            Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
+            Me.blink.add(Me.pnl_edit_track, "BackColor", Color.FromArgb(255, 255, 160, 160))
+            Me.blink.add(Me.pnl_edit_track_background, "BackColor", Color.FromArgb(255, 255, 160, 160))
+            Me.blink.run()
+            Exit Sub
+        ElseIf (Me.TracksList.ContainsKey(Me.ktxt_edit_track_name.Text)) Then
+            If (Me.TracksList(Me.ktxt_edit_track_name.Text) <> Me.EditID) Then
+                Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
+                Me.blink.add(Me.pnl_edit_track, "BackColor", Color.FromArgb(255, 255, 160, 160))
+                Me.blink.add(Me.pnl_edit_track_background, "BackColor", Color.FromArgb(255, 255, 160, 160))
+                Me.blink.run()
+                Exit Sub
+            End If
+        End If
+
+        Me._Tracks.EditTrack(Me.EditID, Me.ktxt_edit_track_name.Text, Me.knud_edit_track_size.Value)
+        Me.RefreshTracks()
+
+        Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+        Me.hideEdit = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+
+        Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
+        Me.hideEdit.add(Me.khgp_edit_track, "Top", Me.khgp_tracks.Size.Height + 76)
+
+        Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
+        Me.blink.add(Me.pnl_edit_track, "BackColor", Color.FromArgb(255, 173, 255, 160))
+        Me.blink.add(Me.pnl_edit_track_background, "BackColor", Color.FromArgb(255, 173, 255, 160))
+        Transitions.Transition.runChain(Me.blink, Me.hideEdit, Me.hideAdd_mg)
+    End Sub
+
+    Private Sub hideEdit_TransitionCompletedEvent(ByVal sender As Object, ByVal e As Transitions.Transition.Args) Handles hideEdit.TransitionCompletedEvent
+        Me.khgp_edit_track.Visible = False
+        Me.pnl_edit_track.BackColor = Color.White
+        Me.pnl_edit_track_background.BackColor = Color.White
+        Me.ktxt_edit_track_name.Text = ""
+        Me.knud_edit_track_size.Value = 1
+    End Sub
+
+#End Region
+
     Private Sub kcbtn_runs_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_runs.CheckedChanged
         Me.khgp_runs.Visible = Me.kcbtn_runs.Checked
         Me.kpnl_runs_switch_views.Visible = Me.kcbtn_runs.Checked
+        'Me.RefreshRuns()
     End Sub
 
     Private Sub kcbtn_tracks_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_tracks.CheckedChanged
@@ -96,7 +433,15 @@
 
     Private Sub kcbtn_add_run_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_add_run.CheckedChanged
         Me.khgp_add_run.Visible = Me.kcbtn_add_run.Checked
-
+        If (Me.kcbtn_add_run.Checked = True) Then
+            If (Me.TracksList.Count > 0) Then
+                Me.kcbx_add_run_track.Checked = True
+                Me.kcbx_add_run_track.Enabled = True
+            Else
+                Me.kcbx_add_run_track.Checked = False
+                Me.kcbx_add_run_track.Enabled = False
+            End If
+        End If
     End Sub
 
     Private Sub kcbtn_runs_weekly_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_runs_weekly.CheckedChanged
@@ -105,6 +450,7 @@
 
     Private Sub kcbtn_runs_monthly_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_runs_monthly.CheckedChanged
         Me.kpnl_runs_monthly.Visible = Me.kcbtn_runs_monthly.Checked
+        Me.knud_runs_monthly_months_before.Value = 0
     End Sub
 
     Private Sub kcbtn_runs_anual_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles kcbtn_runs_anual.CheckedChanged
@@ -128,71 +474,13 @@
         MessageBox.Show(r.GoToWeek(Me.knud_runs_weekly_year.Value, Me.knud_runs_weekly_week.Value))
     End Sub
 
-    Private Sub khgp_add_track_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_add_track.SizeChanged
-        'Me.klbl_no_profiles.Location = New Point((Me.khgp_profiles.Size.Width / 2) - (Me.klbl_no_profiles.Size.Width / 2),
-        '                                        (Me.khgp_profiles.Size.Height / 2) - (Me.klbl_no_profiles.Size.Height / 2))
-        Me.pnl_add_track.Location = New Point((Me.khgp_add_track.Size.Width / 2) - (Me.pnl_add_track.Size.Width / 2), Me.pnl_add_track.Location.Y)
-    End Sub
 
 
-    Private Sub btnshg_add_track_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnshg_add_track.Click
-        If (Me.khgp_add_track.Visible = False) Then
-            Me.khgp_add_track.Visible = True
-            Me.khgp_add_track.Location = New Point(0, Me.Height)
-
-            Me.showAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.showAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-
-            Me.showAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height - 75)
-            Me.showAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height - 76)
-
-            Transitions.Transition.runChain(Me.showAdd_mg, Me.showAdd)
-        End If
-    End Sub
 
 
-    Private Sub bhsg_add_track_cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bhsg_add_track_cancel.Click
-        If (Me.khgp_add_track.Visible = True) Then
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
 
-            Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
-            Me.hideAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height + 76)
 
-            Transitions.Transition.runChain(Me.hideAdd, Me.hideAdd_mg)
-        End If
-    End Sub
 
-    Private Sub hideAdd_TransitionCompletedEvent(ByVal sender As Object, ByVal e As Transitions.Transition.Args) Handles hideAdd.TransitionCompletedEvent
-        Me.khgp_add_track.Visible = False
-        Me.pnl_add_track.BackColor = Color.White
-        Me.pnl_add_track_background.BackColor = Color.White
-        Me.ktxt_add_track_name.Text = ""
-        Me.knud_add_track_size.Value = 1
-    End Sub
-
-    Private Sub bhsg_add_track_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bhsg_add_track_save.Click
-        If (Me.ktxt_add_track_name.Text = "" Or Me.TracksList.ContainsKey(Me.ktxt_add_track_name.Text)) Then
-            Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
-            Me.blink.add(Me.pnl_add_track, "BackColor", Color.FromArgb(255, 255, 160, 160))
-            Me.blink.add(Me.pnl_add_track_background, "BackColor", Color.FromArgb(255, 255, 160, 160))
-            Me.blink.run()
-        Else
-            Me._Tracks.AddTrack(Me.ProfilesList(Me.kdud_profiles.Text), Me.ktxt_add_track_name.Text, Me.knud_add_track_size.Value)
-            Me.RefreshTracks()
-
-            Me.hideAdd = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideAdd_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-
-            Me.hideAdd_mg.add(Me.khgp_tracks, "Height", Me.khgp_tracks.Height + 75)
-            Me.hideAdd.add(Me.khgp_add_track, "Top", Me.khgp_tracks.Size.Height + 76)
-
-            Me.blink = New Transitions.Transition(New Transitions.TransitionType_Flash(1, 600))
-            Me.blink.add(Me.pnl_add_track, "BackColor", Color.FromArgb(255, 173, 255, 160))
-            Me.blink.add(Me.pnl_add_track_background, "BackColor", Color.FromArgb(255, 173, 255, 160))
-            Transitions.Transition.runChain(Me.blink, Me.hideAdd, Me.hideAdd_mg)
-        End If
-    End Sub
 
     Private Sub khgp_tracks_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles khgp_tracks.VisibleChanged
         If khgp_tracks.Visible = True Then
@@ -219,8 +507,8 @@
         If (Me.ToolbarState = CollapsingState.Hiden) Then
             Me.ToolbarState = CollapsingState.Showing
 
-            Me.showToolbar = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.showToolbar_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.showToolbar = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.showToolbar_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
 
             Me.showToolbar_mg.add(Me.kpnl_runs_toolbar, "Height", 41)
@@ -235,8 +523,8 @@
         ElseIf (Me.ToolbarState = CollapsingState.Showed) Then
             Me.ToolbarState = CollapsingState.Hiding
 
-            Me.hideToolbar = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
-            Me.hideToolbar_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(300))
+            Me.hideToolbar = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
+            Me.hideToolbar_mg = New Transitions.Transition(New Transitions.TransitionType_Acceleration(100))
 
 
             Me.hideToolbar_mg.add(Me.kpnl_runs_toolbar, "Height", 0)
@@ -294,11 +582,12 @@
     End Sub
 
     Private Sub bshg_add_run_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_add_run_save.Click
-        If (Me.kcbx_add_run_track.Checked) Then
-            Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.TracksList(Me.kcbb_add_run_track.SelectedItem), Me.knud_add_run_laps.Value)
-        Else
-            Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.knud_add_run_distance.Value)
-        End If
+        Clipboard.SetText(Me._Runs.ConvertToTimestamp(Me.kdtp_add_run_date.Value))
+        'If (Me.kcbx_add_run_track.Checked) Then
+        '    Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.TracksList(Me.kcbb_add_run_track.SelectedItem), Me.knud_add_run_laps.Value)
+        'Else
+        '    Me._Runs.AddRun(Me.ProfilesList(Me.kdud_profiles.Text), Me.kdtp_add_run_date.Value, Me.knud_add_run_duration.Value, Me.knud_add_run_distance.Value)
+        'End If
         Me.kcbtn_runs.Checked = True
     End Sub
 
@@ -306,5 +595,13 @@
         If Me.khgp_add_run.Visible = True Then
             Me.RefreshTracks()
         End If
+    End Sub
+
+    Private Sub kcbtn_runs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles kcbtn_runs.Click
+
+    End Sub
+
+    Private Sub bshg_edit_track_save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_edit_track_save.Click
+
     End Sub
 End Class
