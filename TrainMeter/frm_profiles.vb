@@ -42,7 +42,7 @@ Public Class frm_profiles
 #Region "AddProfile Panel"
 
     Private Sub bshg_add_profile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_add_profile.Click
-        If (Me.khgp_add_profile.Visible = False) Then
+        If (Me.khgp_add_profile.Visible = False And Me.khgp_edit_profile.Visible = False) Then
             Me.bhsg_add_profile_save.Enabled = ComponentFactory.Krypton.Toolkit.ButtonEnabled.True
             Me.bhsg_add_profile_cancel.Enabled = ComponentFactory.Krypton.Toolkit.ButtonEnabled.True
             Me.khgp_add_profile.Visible = True
@@ -117,7 +117,7 @@ Public Class frm_profiles
 #Region "EditProfile Panel"
 
     Private Sub bshg_edit_profile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bshg_edit_profile.Click
-        If (Me.khgp_edit_profile.Visible = False And Me.kltb_profiles.SelectedItem <> "") Then
+        If (Me.khgp_edit_profile.Visible = False And Me.kltb_profiles.SelectedIndex <> -1 And Me.khgp_add_profile.Visible = False) Then
 
             Me.EditUserID = Me.UsersList(Me.kltb_profiles.SelectedItem)
             Me.ktxt_edit_profile_name.Text = Me.kltb_profiles.SelectedItem
