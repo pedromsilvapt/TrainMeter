@@ -1,4 +1,6 @@
 ﻿Public Class Profiles
+    Dim tempQ As QATDB.QATResult
+
 
     Public Function GetProfiles() As QATDB.QATResult
         Return QAT.Execute("LIST ID, name FROM profiles")
@@ -6,12 +8,22 @@
 
     Public Function GetProfileID(ByVal ProfileName As String) As Integer
         QAT.AddParameter(New QATDB.QATCore.QATParameter("name", ProfileName))
-        Return QAT.Execute("LIST ID FROM profiles WHERE name=@name@").GetFirst("ID")
+        Me.tempQ = QAT.Execute("LIST ID FROM profiles WHERE name=@name@")
+        If (Me.tempQ.RowCount = 0) Then
+            Return -1
+        End If
+
+        Return tempQ.GetFirst("ID")
     End Function
 
     Public Function GetProfileName(ByVal ProfileID As Integer) As String
         QAT.AddParameter(New QATDB.QATCore.QATParameter("id", ProfileID))
-        Return QAT.Execute("LIST name FROM profiles WHERE ID=@id@").GetFirst("name")
+        Me.tempQ = QAT.Execute("LIST name FROM profiles WHERE ID=@id@")
+        If (Me.tempQ.RowCount = 0) Then
+            Return -1
+        End If
+
+        Return tempQ.GetFirst("name")
     End Function
 
     Public Function ProfilesCount() As Integer
