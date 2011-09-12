@@ -4,6 +4,16 @@
         Return QAT.Execute("LIST ID, name FROM profiles")
     End Function
 
+    Public Function GetProfileID(ByVal ProfileName As String) As Integer
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("name", ProfileName))
+        Return QAT.Execute("LIST ID FROM profiles WHERE name=@name@").GetFirst("ID")
+    End Function
+
+    Public Function GetProfileName(ByVal ProfileID As Integer) As String
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", ProfileID))
+        Return QAT.Execute("LIST name FROM profiles WHERE ID=@id@").GetFirst("name")
+    End Function
+
     Public Function ProfilesCount() As Integer
         Return QAT.Execute("COUNT profiles").RowCount
     End Function
