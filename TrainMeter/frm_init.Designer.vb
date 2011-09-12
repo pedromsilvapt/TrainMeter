@@ -23,19 +23,17 @@ Partial Class frm_init
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.kbtn_runs = New ComponentFactory.Krypton.Toolkit.KryptonButton()
         Me.kbtn_profiles = New ComponentFactory.Krypton.Toolkit.KryptonButton()
         Me.kbtn_quit = New ComponentFactory.Krypton.Toolkit.KryptonButton()
         Me.KryptonManager1 = New ComponentFactory.Krypton.Toolkit.KryptonManager(Me.components)
+        Me.kbtn_runs = New ComponentFactory.Krypton.Toolkit.KryptonDropButton()
+        Me.kctm_runs = New ComponentFactory.Krypton.Toolkit.KryptonContextMenu()
+        Me.KryptonContextMenuHeading1 = New ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading()
+        Me.KryptonContextMenuItems1 = New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems()
+        Me.KryptonContextMenuItem1 = New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem()
+        Me.KryptonContextMenuItems2 = New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems()
+        Me.kctmi_record_run = New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem()
         Me.SuspendLayout()
-        '
-        'kbtn_runs
-        '
-        Me.kbtn_runs.Location = New System.Drawing.Point(12, 12)
-        Me.kbtn_runs.Name = "kbtn_runs"
-        Me.kbtn_runs.Size = New System.Drawing.Size(121, 110)
-        Me.kbtn_runs.TabIndex = 0
-        Me.kbtn_runs.Values.Text = "Corridas"
         '
         'kbtn_profiles
         '
@@ -57,23 +55,63 @@ Partial Class frm_init
         '
         Me.KryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Black
         '
+        'kbtn_runs
+        '
+        Me.kbtn_runs.DropDownPosition = ComponentFactory.Krypton.Toolkit.VisualOrientation.Bottom
+        Me.kbtn_runs.KryptonContextMenu = Me.kctm_runs
+        Me.kbtn_runs.Location = New System.Drawing.Point(12, 12)
+        Me.kbtn_runs.Name = "kbtn_runs"
+        Me.kbtn_runs.Size = New System.Drawing.Size(121, 110)
+        Me.kbtn_runs.TabIndex = 4
+        Me.kbtn_runs.Values.Text = "Gerir Corridas"
+        '
+        'kctm_runs
+        '
+        Me.kctm_runs.Items.AddRange(New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase() {Me.KryptonContextMenuItems2})
+        '
+        'KryptonContextMenuHeading1
+        '
+        Me.KryptonContextMenuHeading1.ExtraText = ""
+        '
+        'KryptonContextMenuItems1
+        '
+        Me.KryptonContextMenuItems1.Items.AddRange(New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase() {Me.KryptonContextMenuItem1})
+        '
+        'KryptonContextMenuItem1
+        '
+        Me.KryptonContextMenuItem1.Text = "Menu Item"
+        '
+        'KryptonContextMenuItems2
+        '
+        Me.KryptonContextMenuItems2.Items.AddRange(New ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase() {Me.kctmi_record_run})
+        '
+        'kctmi_record_run
+        '
+        Me.kctmi_record_run.Text = "Gravar Corrida"
+        '
         'frm_init
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 134)
+        Me.ClientSize = New System.Drawing.Size(408, 134)
+        Me.Controls.Add(Me.kbtn_runs)
         Me.Controls.Add(Me.kbtn_quit)
         Me.Controls.Add(Me.kbtn_profiles)
-        Me.Controls.Add(Me.kbtn_runs)
         Me.Name = "frm_init"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "TrainMeter"
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents kbtn_runs As ComponentFactory.Krypton.Toolkit.KryptonButton
     Friend WithEvents kbtn_profiles As ComponentFactory.Krypton.Toolkit.KryptonButton
     Friend WithEvents kbtn_quit As ComponentFactory.Krypton.Toolkit.KryptonButton
     Friend WithEvents KryptonManager1 As ComponentFactory.Krypton.Toolkit.KryptonManager
+    Friend WithEvents kbtn_runs As ComponentFactory.Krypton.Toolkit.KryptonDropButton
+    Friend WithEvents kctm_runs As ComponentFactory.Krypton.Toolkit.KryptonContextMenu
+    Friend WithEvents KryptonContextMenuItems2 As ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems
+    Friend WithEvents kctmi_record_run As ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem
+    Friend WithEvents KryptonContextMenuHeading1 As ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading
+    Friend WithEvents KryptonContextMenuItems1 As ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems
+    Friend WithEvents KryptonContextMenuItem1 As ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem
 
 End Class
