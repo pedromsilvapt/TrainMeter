@@ -9,6 +9,11 @@
         Return QAT.Execute("COUNT tracks").RowCount
     End Function
 
+    Public Function TracksCount(ByVal ProfileID As Integer) As Integer
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("profile_id", ProfileID))
+        Return QAT.Execute("COUNT tracks WHERE PROFILE_ID=@profile_id@").RowCount
+    End Function
+
     Public Function EditTrack(ByVal TrackID As Integer, ByVal Name As String, ByVal Distance As Single) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("ID", TrackID))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("name", Name))
