@@ -24,9 +24,9 @@ Partial Class frm_runs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_runs))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.KryptonSplitContainer1 = New ComponentFactory.Krypton.Toolkit.KryptonSplitContainer()
         Me.kcbtn_add_run = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         Me.kdud_profiles = New ComponentFactory.Krypton.Toolkit.KryptonDomainUpDown()
@@ -37,6 +37,29 @@ Partial Class frm_runs
         Me.kcbtn_runs_graphs_view = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         Me.kcbtn_tracks = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         Me.kcbtn_runs = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
+        Me.khgp_edit_track = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
+        Me.bshg_edit_track_save = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.bshg_edit_track_cancel = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.pnl_edit_track_background = New System.Windows.Forms.Panel()
+        Me.pnl_edit_track = New System.Windows.Forms.Panel()
+        Me.knud_edit_track_size = New ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown()
+        Me.klbl_edit_track_size = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
+        Me.ktxt_edit_track_name = New ComponentFactory.Krypton.Toolkit.KryptonTextBox()
+        Me.klbl_edit_track_name = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
+        Me.khgp_add_track = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
+        Me.bhsg_add_track_save = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.bhsg_add_track_cancel = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.pnl_add_track_background = New System.Windows.Forms.Panel()
+        Me.pnl_add_track = New System.Windows.Forms.Panel()
+        Me.knud_add_track_size = New ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown()
+        Me.klbl_add_track_size = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
+        Me.ktxt_add_track_name = New ComponentFactory.Krypton.Toolkit.KryptonTextBox()
+        Me.klbl_add_track_name = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
+        Me.khgp_tracks = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
+        Me.btnshg_add_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.btnshg_edit_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.btnshg_remove_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.kltb_tracks = New ComponentFactory.Krypton.Toolkit.KryptonListBox()
         Me.khgp_add_run = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
         Me.bshg_add_run_save = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
         Me.bshg_add_run_close = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
@@ -59,6 +82,13 @@ Partial Class frm_runs
         Me.kbshg_edit_run = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
         Me.kbshg_remove_run = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
         Me.kbshg_minimize_runs = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
+        Me.dgv_runs = New System.Windows.Forms.DataGridView()
+        Me.ID = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
+        Me.Data = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
+        Me.Tempo = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
+        Me.Track = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
+        Me.Voltas = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
+        Me.Distância = New ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn()
         Me.kpnl_runs_toolbar = New ComponentFactory.Krypton.Toolkit.KryptonPanel()
         Me.kpnl_runs_toolbar_center_container = New ComponentFactory.Krypton.Toolkit.KryptonPanel()
         Me.kcbtn_runs_weekly = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
@@ -69,8 +99,6 @@ Partial Class frm_runs
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.kpnl_runs_complete = New ComponentFactory.Krypton.Toolkit.KryptonPanel()
         Me.kcbb_runs_complete_frequency = New ComponentFactory.Krypton.Toolkit.KryptonComboBox()
-        Me.sklbl_runs_anual_years_before = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
-        Me.sknud_runs_anual_years_before = New ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown()
         Me.klbl_runs_complete_frequency = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
         Me.kpnl_runs_anual = New ComponentFactory.Krypton.Toolkit.KryptonPanel()
         Me.klbl_runs_anual_years_before = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
@@ -98,20 +126,6 @@ Partial Class frm_runs
         Me.klbl_runs_custom_end = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
         Me.klbl_runs_custom_frequency = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
         Me.klbl_runs_custom_start = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
-        Me.khgp_add_track = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
-        Me.bhsg_add_track_save = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
-        Me.bhsg_add_track_cancel = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
-        Me.pnl_add_track_background = New System.Windows.Forms.Panel()
-        Me.pnl_add_track = New System.Windows.Forms.Panel()
-        Me.knud_add_track_size = New ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown()
-        Me.klbl_add_track_size = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
-        Me.ktxt_add_track_name = New ComponentFactory.Krypton.Toolkit.KryptonTextBox()
-        Me.klbl_add_track_name = New ComponentFactory.Krypton.Toolkit.KryptonLabel()
-        Me.khgp_tracks = New ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup()
-        Me.btnshg_add_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
-        Me.btnshg_edit_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
-        Me.btnshg_remove_track = New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup()
-        Me.kltb_tracks = New ComponentFactory.Krypton.Toolkit.KryptonListBox()
         Me.kcs_main = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
         Me.kcs_graphs_type = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
         Me.kcs_change_views = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
@@ -121,6 +135,19 @@ Partial Class frm_runs
         Me.KryptonSplitContainer1.SuspendLayout()
         CType(Me.kpnl_runs_switch_views, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.kpnl_runs_switch_views.SuspendLayout()
+        CType(Me.khgp_edit_track, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.khgp_edit_track.Panel.SuspendLayout()
+        Me.khgp_edit_track.SuspendLayout()
+        Me.pnl_edit_track_background.SuspendLayout()
+        Me.pnl_edit_track.SuspendLayout()
+        CType(Me.khgp_add_track, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.khgp_add_track.Panel.SuspendLayout()
+        Me.khgp_add_track.SuspendLayout()
+        Me.pnl_add_track_background.SuspendLayout()
+        Me.pnl_add_track.SuspendLayout()
+        CType(Me.khgp_tracks, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.khgp_tracks.Panel.SuspendLayout()
+        Me.khgp_tracks.SuspendLayout()
         CType(Me.khgp_add_run, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.khgp_add_run.Panel.SuspendLayout()
         Me.khgp_add_run.SuspendLayout()
@@ -130,6 +157,7 @@ Partial Class frm_runs
         CType(Me.khgp_runs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.khgp_runs.Panel.SuspendLayout()
         Me.khgp_runs.SuspendLayout()
+        CType(Me.dgv_runs, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.kpnl_runs_toolbar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.kpnl_runs_toolbar.SuspendLayout()
         CType(Me.kpnl_runs_toolbar_center_container, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,14 +175,6 @@ Partial Class frm_runs
         CType(Me.kpnl_runs_custom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.kpnl_runs_custom.SuspendLayout()
         CType(Me.kcbb_runs_custom_frequency, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.khgp_add_track, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.khgp_add_track.Panel.SuspendLayout()
-        Me.khgp_add_track.SuspendLayout()
-        Me.pnl_add_track_background.SuspendLayout()
-        Me.pnl_add_track.SuspendLayout()
-        CType(Me.khgp_tracks, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.khgp_tracks.Panel.SuspendLayout()
-        Me.khgp_tracks.SuspendLayout()
         CType(Me.kcs_main, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.kcs_graphs_type, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.kcs_change_views, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -180,10 +200,11 @@ Partial Class frm_runs
         '
         'KryptonSplitContainer1.Panel2
         '
-        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_run)
-        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_runs)
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_edit_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_tracks)
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_run)
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_runs)
         Me.KryptonSplitContainer1.Size = New System.Drawing.Size(654, 396)
         Me.KryptonSplitContainer1.SplitterDistance = 128
         Me.KryptonSplitContainer1.TabIndex = 0
@@ -276,6 +297,214 @@ Partial Class frm_runs
         Me.kcbtn_runs.Size = New System.Drawing.Size(113, 46)
         Me.kcbtn_runs.TabIndex = 0
         Me.kcbtn_runs.Values.Text = "Corridas"
+        '
+        'khgp_edit_track
+        '
+        Me.khgp_edit_track.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.khgp_edit_track.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.bshg_edit_track_save, Me.bshg_edit_track_cancel})
+        Me.khgp_edit_track.HeaderVisibleSecondary = False
+        Me.khgp_edit_track.Location = New System.Drawing.Point(0, 247)
+        Me.khgp_edit_track.Name = "khgp_edit_track"
+        '
+        'khgp_edit_track.Panel
+        '
+        Me.khgp_edit_track.Panel.Controls.Add(Me.pnl_edit_track_background)
+        Me.khgp_edit_track.Size = New System.Drawing.Size(521, 76)
+        Me.khgp_edit_track.TabIndex = 5
+        Me.khgp_edit_track.ValuesPrimary.Heading = "Editar Pista"
+        Me.khgp_edit_track.ValuesPrimary.Image = CType(resources.GetObject("khgp_edit_track.ValuesPrimary.Image"), System.Drawing.Image)
+        Me.khgp_edit_track.Visible = False
+        '
+        'bshg_edit_track_save
+        '
+        Me.bshg_edit_track_save.Image = CType(resources.GetObject("bshg_edit_track_save.Image"), System.Drawing.Image)
+        Me.bshg_edit_track_save.UniqueName = "AE3D49526EE54AACD28AEF6300B26AA3"
+        '
+        'bshg_edit_track_cancel
+        '
+        Me.bshg_edit_track_cancel.Image = CType(resources.GetObject("bshg_edit_track_cancel.Image"), System.Drawing.Image)
+        Me.bshg_edit_track_cancel.UniqueName = "4DEBC9106A99440EBC91D9A8CC5FEEA6"
+        '
+        'pnl_edit_track_background
+        '
+        Me.pnl_edit_track_background.BackColor = System.Drawing.Color.White
+        Me.pnl_edit_track_background.Controls.Add(Me.pnl_edit_track)
+        Me.pnl_edit_track_background.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnl_edit_track_background.Location = New System.Drawing.Point(0, 0)
+        Me.pnl_edit_track_background.Name = "pnl_edit_track_background"
+        Me.pnl_edit_track_background.Size = New System.Drawing.Size(519, 44)
+        Me.pnl_edit_track_background.TabIndex = 3
+        '
+        'pnl_edit_track
+        '
+        Me.pnl_edit_track.BackColor = System.Drawing.Color.White
+        Me.pnl_edit_track.Controls.Add(Me.knud_edit_track_size)
+        Me.pnl_edit_track.Controls.Add(Me.klbl_edit_track_size)
+        Me.pnl_edit_track.Controls.Add(Me.ktxt_edit_track_name)
+        Me.pnl_edit_track.Controls.Add(Me.klbl_edit_track_name)
+        Me.pnl_edit_track.Location = New System.Drawing.Point(63, 6)
+        Me.pnl_edit_track.Name = "pnl_edit_track"
+        Me.pnl_edit_track.Size = New System.Drawing.Size(416, 35)
+        Me.pnl_edit_track.TabIndex = 2
+        '
+        'knud_edit_track_size
+        '
+        Me.knud_edit_track_size.Location = New System.Drawing.Point(281, 8)
+        Me.knud_edit_track_size.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
+        Me.knud_edit_track_size.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.knud_edit_track_size.Name = "knud_edit_track_size"
+        Me.knud_edit_track_size.Size = New System.Drawing.Size(89, 22)
+        Me.knud_edit_track_size.TabIndex = 3
+        Me.knud_edit_track_size.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'klbl_edit_track_size
+        '
+        Me.klbl_edit_track_size.Location = New System.Drawing.Point(171, 8)
+        Me.klbl_edit_track_size.Name = "klbl_edit_track_size"
+        Me.klbl_edit_track_size.Size = New System.Drawing.Size(113, 20)
+        Me.klbl_edit_track_size.TabIndex = 2
+        Me.klbl_edit_track_size.Values.Text = "Tamanho: (metros)"
+        '
+        'ktxt_edit_track_name
+        '
+        Me.ktxt_edit_track_name.Location = New System.Drawing.Point(71, 8)
+        Me.ktxt_edit_track_name.Name = "ktxt_edit_track_name"
+        Me.ktxt_edit_track_name.Size = New System.Drawing.Size(100, 20)
+        Me.ktxt_edit_track_name.TabIndex = 1
+        '
+        'klbl_edit_track_name
+        '
+        Me.klbl_edit_track_name.Location = New System.Drawing.Point(26, 8)
+        Me.klbl_edit_track_name.Name = "klbl_edit_track_name"
+        Me.klbl_edit_track_name.Size = New System.Drawing.Size(47, 20)
+        Me.klbl_edit_track_name.TabIndex = 0
+        Me.klbl_edit_track_name.Values.Text = "Nome:"
+        '
+        'khgp_add_track
+        '
+        Me.khgp_add_track.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.khgp_add_track.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.bhsg_add_track_save, Me.bhsg_add_track_cancel})
+        Me.khgp_add_track.HeaderVisibleSecondary = False
+        Me.khgp_add_track.Location = New System.Drawing.Point(0, 320)
+        Me.khgp_add_track.Name = "khgp_add_track"
+        '
+        'khgp_add_track.Panel
+        '
+        Me.khgp_add_track.Panel.Controls.Add(Me.pnl_add_track_background)
+        Me.khgp_add_track.Size = New System.Drawing.Size(521, 76)
+        Me.khgp_add_track.TabIndex = 3
+        Me.khgp_add_track.ValuesPrimary.Heading = "Adicionar Pista"
+        Me.khgp_add_track.ValuesPrimary.Image = CType(resources.GetObject("khgp_add_track.ValuesPrimary.Image"), System.Drawing.Image)
+        Me.khgp_add_track.Visible = False
+        '
+        'bhsg_add_track_save
+        '
+        Me.bhsg_add_track_save.Image = CType(resources.GetObject("bhsg_add_track_save.Image"), System.Drawing.Image)
+        Me.bhsg_add_track_save.UniqueName = "AE3D49526EE54AACD28AEF6300B26AA3"
+        '
+        'bhsg_add_track_cancel
+        '
+        Me.bhsg_add_track_cancel.Image = CType(resources.GetObject("bhsg_add_track_cancel.Image"), System.Drawing.Image)
+        Me.bhsg_add_track_cancel.UniqueName = "4DEBC9106A99440EBC91D9A8CC5FEEA6"
+        '
+        'pnl_add_track_background
+        '
+        Me.pnl_add_track_background.BackColor = System.Drawing.Color.White
+        Me.pnl_add_track_background.Controls.Add(Me.pnl_add_track)
+        Me.pnl_add_track_background.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnl_add_track_background.Location = New System.Drawing.Point(0, 0)
+        Me.pnl_add_track_background.Name = "pnl_add_track_background"
+        Me.pnl_add_track_background.Size = New System.Drawing.Size(519, 44)
+        Me.pnl_add_track_background.TabIndex = 3
+        '
+        'pnl_add_track
+        '
+        Me.pnl_add_track.BackColor = System.Drawing.Color.White
+        Me.pnl_add_track.Controls.Add(Me.knud_add_track_size)
+        Me.pnl_add_track.Controls.Add(Me.klbl_add_track_size)
+        Me.pnl_add_track.Controls.Add(Me.ktxt_add_track_name)
+        Me.pnl_add_track.Controls.Add(Me.klbl_add_track_name)
+        Me.pnl_add_track.Location = New System.Drawing.Point(63, 6)
+        Me.pnl_add_track.Name = "pnl_add_track"
+        Me.pnl_add_track.Size = New System.Drawing.Size(416, 35)
+        Me.pnl_add_track.TabIndex = 2
+        '
+        'knud_add_track_size
+        '
+        Me.knud_add_track_size.Location = New System.Drawing.Point(281, 8)
+        Me.knud_add_track_size.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
+        Me.knud_add_track_size.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.knud_add_track_size.Name = "knud_add_track_size"
+        Me.knud_add_track_size.Size = New System.Drawing.Size(89, 22)
+        Me.knud_add_track_size.TabIndex = 3
+        Me.knud_add_track_size.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'klbl_add_track_size
+        '
+        Me.klbl_add_track_size.Location = New System.Drawing.Point(171, 8)
+        Me.klbl_add_track_size.Name = "klbl_add_track_size"
+        Me.klbl_add_track_size.Size = New System.Drawing.Size(113, 20)
+        Me.klbl_add_track_size.TabIndex = 2
+        Me.klbl_add_track_size.Values.Text = "Tamanho: (metros)"
+        '
+        'ktxt_add_track_name
+        '
+        Me.ktxt_add_track_name.Location = New System.Drawing.Point(71, 8)
+        Me.ktxt_add_track_name.Name = "ktxt_add_track_name"
+        Me.ktxt_add_track_name.Size = New System.Drawing.Size(100, 20)
+        Me.ktxt_add_track_name.TabIndex = 1
+        '
+        'klbl_add_track_name
+        '
+        Me.klbl_add_track_name.Location = New System.Drawing.Point(26, 8)
+        Me.klbl_add_track_name.Name = "klbl_add_track_name"
+        Me.klbl_add_track_name.Size = New System.Drawing.Size(47, 20)
+        Me.klbl_add_track_name.TabIndex = 0
+        Me.klbl_add_track_name.Values.Text = "Nome:"
+        '
+        'khgp_tracks
+        '
+        Me.khgp_tracks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.khgp_tracks.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.btnshg_add_track, Me.btnshg_edit_track, Me.btnshg_remove_track})
+        Me.khgp_tracks.HeaderVisibleSecondary = False
+        Me.khgp_tracks.Location = New System.Drawing.Point(0, 0)
+        Me.khgp_tracks.Name = "khgp_tracks"
+        '
+        'khgp_tracks.Panel
+        '
+        Me.khgp_tracks.Panel.Controls.Add(Me.kltb_tracks)
+        Me.khgp_tracks.Size = New System.Drawing.Size(521, 396)
+        Me.khgp_tracks.TabIndex = 1
+        Me.khgp_tracks.ValuesPrimary.Heading = "Pistas"
+        Me.khgp_tracks.ValuesPrimary.Image = CType(resources.GetObject("khgp_tracks.ValuesPrimary.Image"), System.Drawing.Image)
+        '
+        'btnshg_add_track
+        '
+        Me.btnshg_add_track.Image = CType(resources.GetObject("btnshg_add_track.Image"), System.Drawing.Image)
+        Me.btnshg_add_track.Text = "Nova Pista"
+        Me.btnshg_add_track.UniqueName = "0629A569FC244FA5D4BB9D4C07F02602"
+        '
+        'btnshg_edit_track
+        '
+        Me.btnshg_edit_track.Image = CType(resources.GetObject("btnshg_edit_track.Image"), System.Drawing.Image)
+        Me.btnshg_edit_track.UniqueName = "90B64B8EB14744E4219082F2934C4A46"
+        '
+        'btnshg_remove_track
+        '
+        Me.btnshg_remove_track.Image = CType(resources.GetObject("btnshg_remove_track.Image"), System.Drawing.Image)
+        Me.btnshg_remove_track.UniqueName = "43F7537E62614D841FB1C543ED43D7A1"
+        '
+        'kltb_tracks
+        '
+        Me.kltb_tracks.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.kltb_tracks.Location = New System.Drawing.Point(0, 0)
+        Me.kltb_tracks.Name = "kltb_tracks"
+        Me.kltb_tracks.Size = New System.Drawing.Size(519, 364)
+        Me.kltb_tracks.TabIndex = 0
         '
         'khgp_add_run
         '
@@ -471,6 +700,7 @@ Partial Class frm_runs
         '
         'khgp_runs.Panel
         '
+        Me.khgp_runs.Panel.Controls.Add(Me.dgv_runs)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_toolbar)
         Me.khgp_runs.Panel.Controls.Add(Me.Chart1)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_complete)
@@ -513,6 +743,62 @@ Partial Class frm_runs
         '
         Me.kbshg_minimize_runs.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.DropDown
         Me.kbshg_minimize_runs.UniqueName = "B42972A4D2854D6D3D8B8FADDF3B88B7"
+        '
+        'dgv_runs
+        '
+        Me.dgv_runs.AllowUserToAddRows = False
+        Me.dgv_runs.AllowUserToDeleteRows = False
+        Me.dgv_runs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgv_runs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv_runs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Data, Me.Tempo, Me.Track, Me.Voltas, Me.Distância})
+        Me.dgv_runs.Location = New System.Drawing.Point(-3, 76)
+        Me.dgv_runs.Name = "dgv_runs"
+        Me.dgv_runs.ReadOnly = True
+        Me.dgv_runs.Size = New System.Drawing.Size(524, 289)
+        Me.dgv_runs.TabIndex = 7
+        '
+        'ID
+        '
+        Me.ID.FillWeight = 30.0!
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        Me.ID.Width = 27
+        '
+        'Data
+        '
+        Me.Data.HeaderText = "Data"
+        Me.Data.Name = "Data"
+        Me.Data.ReadOnly = True
+        Me.Data.Width = 91
+        '
+        'Tempo
+        '
+        Me.Tempo.HeaderText = "Tempo"
+        Me.Tempo.Name = "Tempo"
+        Me.Tempo.ReadOnly = True
+        Me.Tempo.Width = 91
+        '
+        'Track
+        '
+        Me.Track.HeaderText = "Track"
+        Me.Track.Name = "Track"
+        Me.Track.ReadOnly = True
+        Me.Track.Width = 90
+        '
+        'Voltas
+        '
+        Me.Voltas.HeaderText = "Voltas"
+        Me.Voltas.Name = "Voltas"
+        Me.Voltas.ReadOnly = True
+        Me.Voltas.Width = 91
+        '
+        'Distância
+        '
+        Me.Distância.HeaderText = "Distância"
+        Me.Distância.Name = "Distância"
+        Me.Distância.ReadOnly = True
+        Me.Distância.Width = 91
         '
         'kpnl_runs_toolbar
         '
@@ -583,17 +869,17 @@ Partial Class frm_runs
         Me.Chart1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(13, 85)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
+        Me.Chart1.Location = New System.Drawing.Point(410, 85)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(607, 266)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(98, 266)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
         '
@@ -602,8 +888,6 @@ Partial Class frm_runs
         Me.kpnl_runs_complete.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.kpnl_runs_complete.Controls.Add(Me.kcbb_runs_complete_frequency)
-        Me.kpnl_runs_complete.Controls.Add(Me.sklbl_runs_anual_years_before)
-        Me.kpnl_runs_complete.Controls.Add(Me.sknud_runs_anual_years_before)
         Me.kpnl_runs_complete.Controls.Add(Me.klbl_runs_complete_frequency)
         Me.kpnl_runs_complete.Location = New System.Drawing.Point(0, 41)
         Me.kpnl_runs_complete.Name = "kpnl_runs_complete"
@@ -621,24 +905,6 @@ Partial Class frm_runs
         Me.kcbb_runs_complete_frequency.Size = New System.Drawing.Size(121, 21)
         Me.kcbb_runs_complete_frequency.TabIndex = 10
         Me.kcbb_runs_complete_frequency.Text = "Diário - Tempo"
-        '
-        'sklbl_runs_anual_years_before
-        '
-        Me.sklbl_runs_anual_years_before.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sklbl_runs_anual_years_before.Location = New System.Drawing.Point(444, 9)
-        Me.sklbl_runs_anual_years_before.Name = "sklbl_runs_anual_years_before"
-        Me.sklbl_runs_anual_years_before.Size = New System.Drawing.Size(69, 20)
-        Me.sklbl_runs_anual_years_before.TabIndex = 5
-        Me.sklbl_runs_anual_years_before.Values.Text = "Anos Atrás"
-        '
-        'sknud_runs_anual_years_before
-        '
-        Me.sknud_runs_anual_years_before.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sknud_runs_anual_years_before.Location = New System.Drawing.Point(387, 8)
-        Me.sknud_runs_anual_years_before.Maximum = New Decimal(New Integer() {104, 0, 0, 0})
-        Me.sknud_runs_anual_years_before.Name = "sknud_runs_anual_years_before"
-        Me.sknud_runs_anual_years_before.Size = New System.Drawing.Size(58, 22)
-        Me.sknud_runs_anual_years_before.TabIndex = 4
         '
         'klbl_runs_complete_frequency
         '
@@ -715,6 +981,18 @@ Partial Class frm_runs
         '
         'kdud_runs_monthly_month
         '
+        Me.kdud_runs_monthly_month.Items.Add("Janeiro")
+        Me.kdud_runs_monthly_month.Items.Add("Fevereiro")
+        Me.kdud_runs_monthly_month.Items.Add("Março")
+        Me.kdud_runs_monthly_month.Items.Add("Abril")
+        Me.kdud_runs_monthly_month.Items.Add("Maio")
+        Me.kdud_runs_monthly_month.Items.Add("Junho")
+        Me.kdud_runs_monthly_month.Items.Add("Julho")
+        Me.kdud_runs_monthly_month.Items.Add("Agosto")
+        Me.kdud_runs_monthly_month.Items.Add("Setembro")
+        Me.kdud_runs_monthly_month.Items.Add("Outubro")
+        Me.kdud_runs_monthly_month.Items.Add("Novembro")
+        Me.kdud_runs_monthly_month.Items.Add("Dezembro")
         Me.kdud_runs_monthly_month.Location = New System.Drawing.Point(40, 8)
         Me.kdud_runs_monthly_month.Name = "kdud_runs_monthly_month"
         Me.kdud_runs_monthly_month.Size = New System.Drawing.Size(86, 22)
@@ -792,7 +1070,7 @@ Partial Class frm_runs
         '
         Me.knud_runs_weekly_last_weeks.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.knud_runs_weekly_last_weeks.Location = New System.Drawing.Point(371, 8)
-        Me.knud_runs_weekly_last_weeks.Maximum = New Decimal(New Integer() {104, 0, 0, 0})
+        Me.knud_runs_weekly_last_weeks.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.knud_runs_weekly_last_weeks.Name = "knud_runs_weekly_last_weeks"
         Me.knud_runs_weekly_last_weeks.Size = New System.Drawing.Size(58, 22)
         Me.knud_runs_weekly_last_weeks.TabIndex = 4
@@ -901,131 +1179,6 @@ Partial Class frm_runs
         Me.klbl_runs_custom_start.TabIndex = 2
         Me.klbl_runs_custom_start.Values.Text = "Inicio:"
         '
-        'khgp_add_track
-        '
-        Me.khgp_add_track.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.khgp_add_track.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.bhsg_add_track_save, Me.bhsg_add_track_cancel})
-        Me.khgp_add_track.HeaderVisibleSecondary = False
-        Me.khgp_add_track.Location = New System.Drawing.Point(0, 320)
-        Me.khgp_add_track.Name = "khgp_add_track"
-        '
-        'khgp_add_track.Panel
-        '
-        Me.khgp_add_track.Panel.Controls.Add(Me.pnl_add_track_background)
-        Me.khgp_add_track.Size = New System.Drawing.Size(521, 76)
-        Me.khgp_add_track.TabIndex = 3
-        Me.khgp_add_track.ValuesPrimary.Heading = "Adicionar Pista"
-        Me.khgp_add_track.ValuesPrimary.Image = CType(resources.GetObject("khgp_add_track.ValuesPrimary.Image"), System.Drawing.Image)
-        Me.khgp_add_track.Visible = False
-        '
-        'bhsg_add_track_save
-        '
-        Me.bhsg_add_track_save.Image = CType(resources.GetObject("bhsg_add_track_save.Image"), System.Drawing.Image)
-        Me.bhsg_add_track_save.UniqueName = "AE3D49526EE54AACD28AEF6300B26AA3"
-        '
-        'bhsg_add_track_cancel
-        '
-        Me.bhsg_add_track_cancel.Image = CType(resources.GetObject("bhsg_add_track_cancel.Image"), System.Drawing.Image)
-        Me.bhsg_add_track_cancel.UniqueName = "4DEBC9106A99440EBC91D9A8CC5FEEA6"
-        '
-        'pnl_add_track_background
-        '
-        Me.pnl_add_track_background.BackColor = System.Drawing.Color.White
-        Me.pnl_add_track_background.Controls.Add(Me.pnl_add_track)
-        Me.pnl_add_track_background.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnl_add_track_background.Location = New System.Drawing.Point(0, 0)
-        Me.pnl_add_track_background.Name = "pnl_add_track_background"
-        Me.pnl_add_track_background.Size = New System.Drawing.Size(519, 44)
-        Me.pnl_add_track_background.TabIndex = 3
-        '
-        'pnl_add_track
-        '
-        Me.pnl_add_track.BackColor = System.Drawing.Color.White
-        Me.pnl_add_track.Controls.Add(Me.knud_add_track_size)
-        Me.pnl_add_track.Controls.Add(Me.klbl_add_track_size)
-        Me.pnl_add_track.Controls.Add(Me.ktxt_add_track_name)
-        Me.pnl_add_track.Controls.Add(Me.klbl_add_track_name)
-        Me.pnl_add_track.Location = New System.Drawing.Point(63, 6)
-        Me.pnl_add_track.Name = "pnl_add_track"
-        Me.pnl_add_track.Size = New System.Drawing.Size(416, 35)
-        Me.pnl_add_track.TabIndex = 2
-        '
-        'knud_add_track_size
-        '
-        Me.knud_add_track_size.Location = New System.Drawing.Point(281, 8)
-        Me.knud_add_track_size.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
-        Me.knud_add_track_size.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.knud_add_track_size.Name = "knud_add_track_size"
-        Me.knud_add_track_size.Size = New System.Drawing.Size(89, 22)
-        Me.knud_add_track_size.TabIndex = 3
-        Me.knud_add_track_size.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'klbl_add_track_size
-        '
-        Me.klbl_add_track_size.Location = New System.Drawing.Point(171, 8)
-        Me.klbl_add_track_size.Name = "klbl_add_track_size"
-        Me.klbl_add_track_size.Size = New System.Drawing.Size(113, 20)
-        Me.klbl_add_track_size.TabIndex = 2
-        Me.klbl_add_track_size.Values.Text = "Tamanho: (metros)"
-        '
-        'ktxt_add_track_name
-        '
-        Me.ktxt_add_track_name.Location = New System.Drawing.Point(71, 8)
-        Me.ktxt_add_track_name.Name = "ktxt_add_track_name"
-        Me.ktxt_add_track_name.Size = New System.Drawing.Size(100, 20)
-        Me.ktxt_add_track_name.TabIndex = 1
-        '
-        'klbl_add_track_name
-        '
-        Me.klbl_add_track_name.Location = New System.Drawing.Point(26, 8)
-        Me.klbl_add_track_name.Name = "klbl_add_track_name"
-        Me.klbl_add_track_name.Size = New System.Drawing.Size(47, 20)
-        Me.klbl_add_track_name.TabIndex = 0
-        Me.klbl_add_track_name.Values.Text = "Nome:"
-        '
-        'khgp_tracks
-        '
-        Me.khgp_tracks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.khgp_tracks.ButtonSpecs.AddRange(New ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup() {Me.btnshg_add_track, Me.btnshg_edit_track, Me.btnshg_remove_track})
-        Me.khgp_tracks.HeaderVisibleSecondary = False
-        Me.khgp_tracks.Location = New System.Drawing.Point(0, 0)
-        Me.khgp_tracks.Name = "khgp_tracks"
-        '
-        'khgp_tracks.Panel
-        '
-        Me.khgp_tracks.Panel.Controls.Add(Me.kltb_tracks)
-        Me.khgp_tracks.Size = New System.Drawing.Size(521, 396)
-        Me.khgp_tracks.TabIndex = 1
-        Me.khgp_tracks.ValuesPrimary.Heading = "Pistas"
-        Me.khgp_tracks.ValuesPrimary.Image = CType(resources.GetObject("khgp_tracks.ValuesPrimary.Image"), System.Drawing.Image)
-        '
-        'btnshg_add_track
-        '
-        Me.btnshg_add_track.Image = CType(resources.GetObject("btnshg_add_track.Image"), System.Drawing.Image)
-        Me.btnshg_add_track.Text = "Nova Pista"
-        Me.btnshg_add_track.UniqueName = "0629A569FC244FA5D4BB9D4C07F02602"
-        '
-        'btnshg_edit_track
-        '
-        Me.btnshg_edit_track.Image = CType(resources.GetObject("btnshg_edit_track.Image"), System.Drawing.Image)
-        Me.btnshg_edit_track.UniqueName = "90B64B8EB14744E4219082F2934C4A46"
-        '
-        'btnshg_remove_track
-        '
-        Me.btnshg_remove_track.Image = CType(resources.GetObject("btnshg_remove_track.Image"), System.Drawing.Image)
-        Me.btnshg_remove_track.UniqueName = "43F7537E62614D841FB1C543ED43D7A1"
-        '
-        'kltb_tracks
-        '
-        Me.kltb_tracks.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.kltb_tracks.Location = New System.Drawing.Point(0, 0)
-        Me.kltb_tracks.Name = "kltb_tracks"
-        Me.kltb_tracks.Size = New System.Drawing.Size(519, 364)
-        Me.kltb_tracks.TabIndex = 0
-        '
         'kcs_main
         '
         Me.kcs_main.CheckButtons.Add(Me.kcbtn_runs)
@@ -1065,6 +1218,21 @@ Partial Class frm_runs
         CType(Me.kpnl_runs_switch_views, System.ComponentModel.ISupportInitialize).EndInit()
         Me.kpnl_runs_switch_views.ResumeLayout(False)
         Me.kpnl_runs_switch_views.PerformLayout()
+        Me.khgp_edit_track.Panel.ResumeLayout(False)
+        CType(Me.khgp_edit_track, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.khgp_edit_track.ResumeLayout(False)
+        Me.pnl_edit_track_background.ResumeLayout(False)
+        Me.pnl_edit_track.ResumeLayout(False)
+        Me.pnl_edit_track.PerformLayout()
+        Me.khgp_add_track.Panel.ResumeLayout(False)
+        CType(Me.khgp_add_track, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.khgp_add_track.ResumeLayout(False)
+        Me.pnl_add_track_background.ResumeLayout(False)
+        Me.pnl_add_track.ResumeLayout(False)
+        Me.pnl_add_track.PerformLayout()
+        Me.khgp_tracks.Panel.ResumeLayout(False)
+        CType(Me.khgp_tracks, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.khgp_tracks.ResumeLayout(False)
         Me.khgp_add_run.Panel.ResumeLayout(False)
         CType(Me.khgp_add_run, System.ComponentModel.ISupportInitialize).EndInit()
         Me.khgp_add_run.ResumeLayout(False)
@@ -1075,6 +1243,7 @@ Partial Class frm_runs
         Me.khgp_runs.Panel.ResumeLayout(False)
         CType(Me.khgp_runs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.khgp_runs.ResumeLayout(False)
+        CType(Me.dgv_runs, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.kpnl_runs_toolbar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.kpnl_runs_toolbar.ResumeLayout(False)
         CType(Me.kpnl_runs_toolbar_center_container, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1097,15 +1266,6 @@ Partial Class frm_runs
         Me.kpnl_runs_custom.ResumeLayout(False)
         Me.kpnl_runs_custom.PerformLayout()
         CType(Me.kcbb_runs_custom_frequency, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.khgp_add_track.Panel.ResumeLayout(False)
-        CType(Me.khgp_add_track, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.khgp_add_track.ResumeLayout(False)
-        Me.pnl_add_track_background.ResumeLayout(False)
-        Me.pnl_add_track.ResumeLayout(False)
-        Me.pnl_add_track.PerformLayout()
-        Me.khgp_tracks.Panel.ResumeLayout(False)
-        CType(Me.khgp_tracks, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.khgp_tracks.ResumeLayout(False)
         CType(Me.kcs_main, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.kcs_graphs_type, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.kcs_change_views, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1152,8 +1312,6 @@ Partial Class frm_runs
     Friend WithEvents klbl_runs_custom_frequency As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents klbl_runs_custom_start As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents kpnl_runs_complete As ComponentFactory.Krypton.Toolkit.KryptonPanel
-    Friend WithEvents sklbl_runs_anual_years_before As ComponentFactory.Krypton.Toolkit.KryptonLabel
-    Friend WithEvents sknud_runs_anual_years_before As ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown
     Friend WithEvents klbl_runs_complete_frequency As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents klbl_runs_custom_end As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents kdtp_runs_custom_end As ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker
@@ -1200,4 +1358,20 @@ Partial Class frm_runs
     Friend WithEvents klbl_add_run_distance As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents pnl_add_run As System.Windows.Forms.Panel
     Friend WithEvents pnl_add_run_background As System.Windows.Forms.Panel
+    Friend WithEvents dgv_runs As System.Windows.Forms.DataGridView
+    Friend WithEvents ID As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents Data As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents Tempo As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents Track As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents Voltas As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents Distância As ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn
+    Friend WithEvents khgp_edit_track As ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup
+    Friend WithEvents bshg_edit_track_save As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
+    Friend WithEvents bshg_edit_track_cancel As ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup
+    Friend WithEvents pnl_edit_track_background As System.Windows.Forms.Panel
+    Friend WithEvents pnl_edit_track As System.Windows.Forms.Panel
+    Friend WithEvents knud_edit_track_size As ComponentFactory.Krypton.Toolkit.KryptonNumericUpDown
+    Friend WithEvents klbl_edit_track_size As ComponentFactory.Krypton.Toolkit.KryptonLabel
+    Friend WithEvents ktxt_edit_track_name As ComponentFactory.Krypton.Toolkit.KryptonTextBox
+    Friend WithEvents klbl_edit_track_name As ComponentFactory.Krypton.Toolkit.KryptonLabel
 End Class
