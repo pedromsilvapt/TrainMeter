@@ -24,9 +24,9 @@ Partial Class frm_runs
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_runs))
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.KryptonSplitContainer1 = New ComponentFactory.Krypton.Toolkit.KryptonSplitContainer()
         Me.kcbtn_add_run = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         Me.kdud_profiles = New ComponentFactory.Krypton.Toolkit.KryptonDomainUpDown()
@@ -129,6 +129,7 @@ Partial Class frm_runs
         Me.kcs_main = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
         Me.kcs_graphs_type = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
         Me.kcs_change_views = New ComponentFactory.Krypton.Toolkit.KryptonCheckSet(Me.components)
+        Me.kcbtn_edit_run = New ComponentFactory.Krypton.Toolkit.KryptonCheckButton()
         CType(Me.KryptonSplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.KryptonSplitContainer1.Panel1.SuspendLayout()
         Me.KryptonSplitContainer1.Panel2.SuspendLayout()
@@ -191,6 +192,7 @@ Partial Class frm_runs
         '
         'KryptonSplitContainer1.Panel1
         '
+        Me.KryptonSplitContainer1.Panel1.Controls.Add(Me.kcbtn_edit_run)
         Me.KryptonSplitContainer1.Panel1.Controls.Add(Me.kcbtn_add_run)
         Me.KryptonSplitContainer1.Panel1.Controls.Add(Me.kdud_profiles)
         Me.KryptonSplitContainer1.Panel1.Controls.Add(Me.KryptonButton1)
@@ -200,11 +202,11 @@ Partial Class frm_runs
         '
         'KryptonSplitContainer1.Panel2
         '
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_runs)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_edit_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_tracks)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_run)
-        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_runs)
         Me.KryptonSplitContainer1.Size = New System.Drawing.Size(654, 396)
         Me.KryptonSplitContainer1.SplitterDistance = 128
         Me.KryptonSplitContainer1.TabIndex = 0
@@ -703,11 +705,11 @@ Partial Class frm_runs
         Me.khgp_runs.Panel.Controls.Add(Me.dgv_runs)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_toolbar)
         Me.khgp_runs.Panel.Controls.Add(Me.Chart1)
+        Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_weekly)
+        Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_custom)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_complete)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_anual)
         Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_monthly)
-        Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_weekly)
-        Me.khgp_runs.Panel.Controls.Add(Me.kpnl_runs_custom)
         Me.khgp_runs.Size = New System.Drawing.Size(521, 396)
         Me.khgp_runs.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.khgp_runs.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -748,6 +750,9 @@ Partial Class frm_runs
         '
         Me.dgv_runs.AllowUserToAddRows = False
         Me.dgv_runs.AllowUserToDeleteRows = False
+        Me.dgv_runs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgv_runs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv_runs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_runs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Data, Me.Tempo, Me.Track, Me.Voltas, Me.Distância})
@@ -869,16 +874,16 @@ Partial Class frm_runs
         Me.Chart1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(410, 85)
         Me.Chart1.Name = "Chart1"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart1.Series.Add(Series2)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(98, 266)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
@@ -1201,6 +1206,15 @@ Partial Class frm_runs
         Me.kcs_change_views.CheckButtons.Add(Me.kcbtn_runs_table_view)
         Me.kcs_change_views.CheckedButton = Me.kcbtn_runs_table_view
         '
+        'kcbtn_edit_run
+        '
+        Me.kcbtn_edit_run.Location = New System.Drawing.Point(12, 116)
+        Me.kcbtn_edit_run.Name = "kcbtn_edit_run"
+        Me.kcbtn_edit_run.Size = New System.Drawing.Size(113, 46)
+        Me.kcbtn_edit_run.TabIndex = 10
+        Me.kcbtn_edit_run.Values.Text = "Editar Corrida"
+        Me.kcbtn_edit_run.Visible = False
+        '
         'frm_runs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1374,4 +1388,5 @@ Partial Class frm_runs
     Friend WithEvents klbl_edit_track_size As ComponentFactory.Krypton.Toolkit.KryptonLabel
     Friend WithEvents ktxt_edit_track_name As ComponentFactory.Krypton.Toolkit.KryptonTextBox
     Friend WithEvents klbl_edit_track_name As ComponentFactory.Krypton.Toolkit.KryptonLabel
+    Friend WithEvents kcbtn_edit_run As ComponentFactory.Krypton.Toolkit.KryptonCheckButton
 End Class

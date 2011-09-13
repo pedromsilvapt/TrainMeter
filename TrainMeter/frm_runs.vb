@@ -39,7 +39,7 @@
             all_tracks = Me._Runs.GetWeeklyRuns(Me.knud_runs_weekly_week.Value, Me.knud_runs_weekly_year.Value, Me.ProfilesList(Me.kdud_profiles.Text)).QueryResult
         End If
 
-        For Each _Track As DataRowCollection In all_tracks.GetDataTable.Rows
+        For Each _Track As DataRow In all_tracks.GetDataTable.Rows
             Me.dgv_runs.Rows.Add(_Track.Item("ID"), _Track.Item("date"), _Track.Item("duration"), _Track.Item("ID"), _Track.Item("TRACK_ID"), _Track.Item("laps"), _Track.Item("distance"))
         Next
     End Sub
@@ -512,12 +512,17 @@
 
 
             Me.showToolbar_mg.add(Me.kpnl_runs_toolbar, "Height", 41)
+            Me.showToolbar_mg.add(Me.dgv_runs, "Top", 41)
+            Me.showToolbar_mg.add(Me.dgv_runs, "Height", Me.dgv_runs.Height - 41)
 
             Me.showToolbar.add(Me.kpnl_runs_weekly, "Height", 38)
             Me.showToolbar.add(Me.kpnl_runs_monthly, "Height", 38)
             Me.showToolbar.add(Me.kpnl_runs_anual, "Height", 38)
             Me.showToolbar.add(Me.kpnl_runs_complete, "Height", 38)
             Me.showToolbar.add(Me.kpnl_runs_custom, "Height", 38)
+            Me.showToolbar.add(Me.dgv_runs, "Top", 38 + 41)
+            Me.showToolbar.add(Me.dgv_runs, "Height", Me.dgv_runs.Height - 41 - 38)
+
 
             Transitions.Transition.runChain(Me.showToolbar_mg, Me.showToolbar)
         ElseIf (Me.ToolbarState = CollapsingState.Showed) Then
@@ -528,12 +533,16 @@
 
 
             Me.hideToolbar_mg.add(Me.kpnl_runs_toolbar, "Height", 0)
+            Me.hideToolbar_mg.add(Me.dgv_runs, "Top", 0)
+            Me.hideToolbar_mg.add(Me.dgv_runs, "Height", Me.dgv_runs.Height + 41 + 38)
 
             Me.hideToolbar.add(Me.kpnl_runs_weekly, "Height", 0)
             Me.hideToolbar.add(Me.kpnl_runs_monthly, "Height", 0)
             Me.hideToolbar.add(Me.kpnl_runs_anual, "Height", 0)
             Me.hideToolbar.add(Me.kpnl_runs_complete, "Height", 0)
             Me.hideToolbar.add(Me.kpnl_runs_custom, "Height", 0)
+            Me.hideToolbar.add(Me.dgv_runs, "Top", 41)
+            Me.hideToolbar.add(Me.dgv_runs, "Height", Me.dgv_runs.Height + 38)
 
             Transitions.Transition.runChain(Me.hideToolbar, Me.hideToolbar_mg)
         End If
