@@ -225,12 +225,12 @@ Partial Class frm_runs
         '
         'KryptonSplitContainer1.Panel2
         '
-        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_edit_run)
-        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_run)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_runs)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_edit_track)
         Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_tracks)
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_edit_run)
+        Me.KryptonSplitContainer1.Panel2.Controls.Add(Me.khgp_add_run)
         Me.KryptonSplitContainer1.Size = New System.Drawing.Size(654, 396)
         Me.KryptonSplitContainer1.SplitterDistance = 128
         Me.KryptonSplitContainer1.TabIndex = 0

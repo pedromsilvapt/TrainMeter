@@ -715,4 +715,10 @@
     Private Sub kcbtn_edit_run_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles kcbtn_edit_run.Click
 
     End Sub
+
+    Private Sub kbshg_remove_run_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles kbshg_remove_run.Click
+        If (Me.dgv_runs.SelectedRows.Count > 0) Then
+            Me._Runs.RemoveRun(Me.dgv_runs.SelectedRows.Item(0).Cells(0).Value)
+        End If
+    End Sub
 End Class
