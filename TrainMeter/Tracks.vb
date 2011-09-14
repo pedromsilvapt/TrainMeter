@@ -57,9 +57,15 @@
         Return True
     End Function
 
-    Public Function RemoveTrack(ByVal trackID As Integer)
+    Public Function RemoveTrack(ByVal trackID As Integer) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("ID", trackID))
         QAT.Execute("DELETE tracks WHERE ID=@ID@")
+        Return True
+    End Function
+
+    Public Function TrackExists(ByVal TrackID As Integer) As Boolean
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", TrackID))
+        Return Not QAT.Execute("LIST ID FROM tracks WHERE ID=@id@").HasNothing
     End Function
 
     Public Function GetDistance(ByVal TrackID As Integer, Optional ByVal Laps As Integer = 1) As Integer
