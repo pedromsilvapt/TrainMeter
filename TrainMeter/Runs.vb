@@ -68,6 +68,16 @@
         Return True
     End Function
 
+    Public Function RemoveRun(ByVal RunID As Integer) As Boolean
+        If (Not Me.RunExists(RunID)) Then
+            Return False
+        End If
+
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("ID", RunID))
+        QAT.Execute("DELETE runs WHERE ID=@ID@")
+        Return True
+    End Function
+
     Public Function RunExists(ByVal RunID As Integer) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("id", RunID))
 
