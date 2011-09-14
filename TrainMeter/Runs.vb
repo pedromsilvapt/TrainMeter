@@ -20,7 +20,7 @@
 
     Public Function AddRun(ByVal profile As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal track As Integer, ByVal laps As Integer) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile", profile))
-        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", datetime))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", Me.ConvertToTimestamp(datetime)))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("track", track))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("laps", laps))
@@ -30,11 +30,57 @@
 
     Public Function AddRun(ByVal profile As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal distance As Integer) As Boolean
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile", profile))
-        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", datetime))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", Me.ConvertToTimestamp(datetime)))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("distance", distance))
         QAT.Execute("ADD runs ID=#?,TRACK_ID=-1,PROFILE_ID=@profile@,date=@datetime@,duration=@duration@,laps=1,distance=@distance@")
         Return (True)
+    End Function
+
+    Public Function EditRun(ByVal RunID As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal track As Integer, ByVal laps As Integer) As Boolean
+        If (Not Me.RunExists(RunID)) Then
+            Return False
+        End If
+
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", RunID))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", Me.ConvertToTimestamp(datetime)))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("track", track))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("laps", laps))
+
+        QAT.Execute("CHANGE date=@datetime@,duration=@duration@,TRACK_ID=@track@,laps=@laps@,distance=0 FROM runs WHERE ID=@id@")
+
+        Return True
+    End Function
+
+    Public Function EditRun(ByVal RunID As Integer, ByVal datetime As Date, ByVal duration As Integer, ByVal distance As Integer) As Boolean
+        If (Not Me.RunExists(RunID)) Then
+            Return False
+        End If
+
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", RunID))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("datetime", Me.ConvertToTimestamp(datetime)))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("duration", duration))
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("distance", distance))
+
+        QAT.Execute("CHANGE date=@datetime@,duration=@duration@,TRACK_ID=-1,laps=-1,distance=@distance@ FROM runs WHERE ID=@id@")
+
+        Return True
+    End Function
+
+    Public Function RunExists(ByVal RunID As Integer) As Boolean
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", RunID))
+
+        Return Not QAT.Execute("LIST ID FROM runs WHERE ID=@id@").HasNothing
+    End Function
+
+    Public Function GetRun(ByVal RunID As Integer) As QATDB.QATResult
+        If (Not Me.RunExists(RunID)) Then
+            Return Nothing
+        End If
+
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", RunID))
+        Return QAT.Execute("LIST * FROM runs WHERE ID=@id@")
     End Function
 
     Public Function GetWeeklyRuns(ByVal WeekNumber As Integer, ByVal Year As Integer, ByVal profile As Integer) As RunsReturn
@@ -50,11 +96,16 @@
         Dim EndTimeStamp As Integer = Me.ConvertToTimestamp(EndDay)
         Dim returning As RunsReturn
 
+        'Clipboard.SetText("start_day: " & StartTimeStamp & vbNewLine &
+        '                  "end_day: " & EndTimeStamp & vbNewLine &
+        '                  "profile_id" & profile)
+
         QAT.AddParameter(New QATDB.QATCore.QATParameter("start_day", StartTimeStamp))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("end_day", EndTimeStamp))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile_id", profile))
 
-        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps WHERE date > @start_day@ and date < @end_daye@ and PROFILE_ID = @profile_id@")
+        'returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, PROFILE_ID, date, duration, laps, distance FROM runs WHERE  date > @start_day@ , date < @end_day@ , PROFILE_ID = @profile_id@")
+        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, PROFILE_ID, date, duration, laps, distance FROM runs WHERE PROFILE_ID = @profile_id@")
         returning.StartDate = StartDay
         returning.EndDate = EndDay
         returning.StartTimeStamp = StartTimeStamp
@@ -82,7 +133,7 @@
         QAT.AddParameter(New QATDB.QATCore.QATParameter("end_day", EndTimeStamp))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile_id", profile))
 
-        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps WHERE date > @start_day@ and date < @end_daye@ and PROFILE_ID = @profile_id@")
+        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps FROM runs WHERE date > @start_day@ , date < @end_daye@ , PROFILE_ID = @profile_id@")
         returning.StartDate = StartDay
         returning.EndDate = EndDay
         returning.StartTimeStamp = StartTimeStamp
@@ -105,7 +156,7 @@
         QAT.AddParameter(New QATDB.QATCore.QATParameter("end_day", EndTimeStamp))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile_id", profile))
 
-        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps WHERE date > @start_day@ and date < @end_daye@ and PROFILE_ID = @profile_id@")
+        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps FROM runs WHERE date > @start_day@ , date < @end_daye@ , PROFILE_ID = @profile_id@")
         returning.StartDate = StartDay
         returning.EndDate = EndDay
         returning.StartTimeStamp = StartTimeStamp
@@ -125,7 +176,7 @@
         Dim EndTimeStamp As Integer = Me.ConvertToTimestamp("HIGHEST date FROM runs WHERE PROFILE_ID = @profile_id@")
 
         QAT.AddParameter(New QATDB.QATCore.QATParameter("profile_id", profile))
-        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps WHERE PROFILE_ID = @profile_id@")
+        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps FROM runs WHERE PROFILE_ID = @profile_id@")
         returning.StartDate = Me.ConvertToDateTime(StartTimeStamp)
         returning.EndDate = Me.ConvertToDateTime(EndTimeStamp)
         returning.StartTimeStamp = StartTimeStamp
@@ -146,7 +197,7 @@
         QAT.AddParameter(New QATDB.QATCore.QATParameter("start_day", StartTimeStamp))
         QAT.AddParameter(New QATDB.QATCore.QATParameter("end_day", EndTimeStamp))
 
-        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps WHERE date > @start_day@ and date < @end_day@ PROFILE_ID = @profile_id@")
+        returning.QueryResult = QAT.Execute("LIST ID, TRACK_ID, date, duration, laps FROM runs WHERE date > @start_day@ , date < @end_day@ , PROFILE_ID = @profile_id@")
         returning.StartDate = Me.ConvertToDateTime(StartTimeStamp)
         returning.EndDate = Me.ConvertToDateTime(EndTimeStamp)
         returning.StartTimeStamp = StartTimeStamp
@@ -200,7 +251,7 @@
         Return cal.GetWeekOfYear([date], cwr, fdow) - 1
     End Function
 
-    Private Function ConvertToDateTime(ByVal value As Integer) As DateTime
+    Public Function ConvertToDateTime(ByVal value As Integer) As DateTime
         Dim dateTime As New System.DateTime(1970, 1, 1, 0, 0, 0, 0)
 
         dateTime = dateTime.AddSeconds(value)
@@ -208,7 +259,7 @@
         Return dateTime
     End Function
 
-    Private Function ConvertToTimestamp(ByVal value As DateTime) As Double
+    Public Function ConvertToTimestamp(ByVal value As DateTime) As Double
         'create Timespan by subtracting the value provided from
         'the Unix Epoch
         Dim span As TimeSpan = (value - New DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime())
