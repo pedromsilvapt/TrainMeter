@@ -27,6 +27,11 @@
         End If
     End Function
 
+    Public Function GetTrack(ByVal TrackID As Integer) As QATDB.QATResult
+        QAT.AddParameter(New QATDB.QATCore.QATParameter("id", TrackID))
+        Return QAT.Execute("LIST * FROM tracks WHERE ID=@id@")
+    End Function
+
     Public Function TracksCount() As Integer
         Return QAT.Execute("COUNT tracks").RowCount
     End Function
